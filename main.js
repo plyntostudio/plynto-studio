@@ -1,35 +1,12 @@
 // Scroll reveal
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-    }
-  });
-}, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
-
+const observer = new IntersectionObserver(
+  (entries) => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } }),
+  { threshold: 0.12 }
+);
 document.querySelectorAll('[data-reveal]').forEach(el => observer.observe(el));
 
-// Copy number
-function copyNumber() {
-  navigator.clipboard.writeText('8134877412').then(() => {
-    ['copy-text', 'copy-text-2'].forEach(id => {
-      const el = document.getElementById(id);
-      if (!el) return;
-      const original = el.textContent;
-      el.textContent = 'Copied ✓';
-      el.style.color = '#1DB954';
-      setTimeout(() => {
-        el.textContent = original;
-        el.style.color = '';
-      }, 2000);
-    });
-  }).catch(() => {});
-}
-
-// Nav scroll state
+// Nav shadow on scroll
 const nav = document.querySelector('.nav');
 window.addEventListener('scroll', () => {
-  nav.style.borderBottomColor = window.scrollY > 20
-    ? 'rgba(255,255,255,0.1)'
-    : 'rgba(255,255,255,0.08)';
+  nav.style.boxShadow = window.scrollY > 10 ? '0 1px 24px rgba(26,24,20,0.07)' : 'none';
 }, { passive: true });
