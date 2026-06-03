@@ -8,5 +8,20 @@ document.querySelectorAll('[data-reveal]').forEach(el => observer.observe(el));
 // Nav shadow on scroll
 const nav = document.querySelector('.nav');
 window.addEventListener('scroll', () => {
+  nav?.classList.toggle('scrolled', window.scrollY > 10);
   nav.style.boxShadow = window.scrollY > 10 ? '0 1px 24px rgba(26,24,20,0.07)' : 'none';
 }, { passive: true });
+
+// Shared mobile nav for pages that use the standard menu markup
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+
+function closeMobile() {
+  hamburger?.classList.remove('open');
+  mobileMenu?.classList.remove('open');
+}
+
+hamburger?.addEventListener('click', () => {
+  hamburger.classList.toggle('open');
+  mobileMenu?.classList.toggle('open');
+});
