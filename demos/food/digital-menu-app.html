@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TableTap | Digital Menu App Demo</title>
+  <meta name="description" content="QR-powered digital menu app demo with mobile-first browsing, filters, and table ordering concepts." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="demo.css" />
+</head>
+<body class="theme-menu">
+  <div class="demo-page">
+    <header class="demo-topbar">
+      <div class="demo-topbar-inner">
+        <div class="demo-brand">TableTap</div>
+        <nav class="demo-nav">
+          <a class="demo-link" href="../../showcase.html">Showcase</a>
+          <a class="demo-link" href="fine-dining.html">Fine Dining</a>
+          <a class="demo-link" href="order-platform.html">Ordering</a>
+          <a class="demo-link is-active" href="digital-menu-app.html">Menu App</a>
+          <a class="demo-link" href="catering-events.html">Catering</a>
+          <a class="demo-link" href="multi-branch-brand.html">Multi-Branch</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="demo-shell">
+      <section class="demo-hero">
+        <span class="demo-kicker">QR-first dining experience</span>
+        <div class="demo-grid demo-grid--hero">
+          <div>
+            <h1 class="demo-title">A table menu designed for the <em>phone in your guest's hand.</em></h1>
+            <p class="demo-copy">This demo shows how a QR menu app can look premium instead of improvised. It is optimized for table browsing, dietary filters, visual item cards, and subtle upsells like pairings, chef notes, and dessert prompts.</p>
+            <div class="demo-actions">
+              <a class="demo-button demo-button--primary" href="#screens">View app screens</a>
+              <a class="demo-button demo-button--ghost" href="#filters">See filter system</a>
+            </div>
+            <div class="demo-anchor-nav">
+              <a href="#screens">Screens</a>
+              <a href="#filters">Filters</a>
+              <a href="#table-flow">Table flow</a>
+              <a href="#benefits">Why it works</a>
+            </div>
+          </div>
+          <div class="demo-panel hero-visual">
+            <div class="visual-stack">
+              <div class="visual-block visual-block--hero">
+                <div class="pill-row">
+                  <span class="pill">Scan at table 14</span>
+                  <span class="pill">Veg / Jain / Gluten-free</span>
+                </div>
+                <div class="mock-text">
+                  <span></span><span></span><span></span>
+                </div>
+              </div>
+              <div class="visual-block visual-block--split">
+                <div>
+                  <small>Guest comfort</small>
+                  <h3>Readable in low light</h3>
+                  <p class="demo-section-note">High contrast typography and large tap targets for actual restaurant use.</p>
+                </div>
+                <div>
+                  <small>Operational ease</small>
+                  <h3>Menu edits in minutes</h3>
+                  <p class="demo-section-note">Seasonal items and sold-out flags can be updated without reprinting anything.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="demo-section" id="screens">
+        <div class="demo-section-head">
+          <div>
+            <p class="demo-kicker">App views</p>
+            <h2 class="demo-section-title">Three mobile screens, one smooth dining flow.</h2>
+          </div>
+        </div>
+
+        <div class="phone-grid">
+          <article class="phone">
+            <div class="phone-screen">
+              <small>Home</small>
+              <h3 style="margin:0;">Chef's Highlights</h3>
+              <div class="pill-row">
+                <span class="pill">Seafood</span>
+                <span class="pill">Vegetarian</span>
+              </div>
+              <div class="demo-card">
+                <small>Signature</small>
+                <h3>Woodfire Burrata</h3>
+                <p>Tomato ash oil, basil crystal, grilled sourdough.</p>
+              </div>
+              <div class="mock-text"><span></span><span></span><span></span></div>
+            </div>
+          </article>
+
+          <article class="phone">
+            <div class="phone-screen">
+              <small>Filters</small>
+              <h3 style="margin:0;">Built for mixed dietary groups</h3>
+              <div class="pill-row">
+                <span class="pill">Jain</span>
+                <span class="pill">No nuts</span>
+                <span class="pill">High protein</span>
+                <span class="pill">Kids</span>
+              </div>
+              <div class="demo-card">
+                <small>Quick result</small>
+                <h3>Lemon millet bowl</h3>
+                <p>Auto-matched to vegan, nut-free, and low spice tags.</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="phone">
+            <div class="phone-screen">
+              <small>Table order</small>
+              <h3 style="margin:0;">Order with service optional</h3>
+              <div class="demo-card">
+                <small>Current cart</small>
+                <h3>2 starters, 2 mains</h3>
+                <p>Requests added: no onion, extra crisp, birthday plate.</p>
+              </div>
+              <div class="pill-row">
+                <span class="pill">Call server</span>
+                <span class="pill">Add dessert</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="demo-section" id="filters">
+        <div class="two-col">
+          <article class="demo-card feature-item">
+            <small>Filtering system</small>
+            <h3>Dietary logic that reduces ordering friction</h3>
+            <p>Vegetarian, vegan, Jain, nut-free, gluten-free, low spice, and chef-recommended filters make the menu usable for real tables with mixed preferences.</p>
+          </article>
+          <article class="demo-card feature-item">
+            <small>Upsell moments</small>
+            <h3>Pairings, desserts, and chef notes without clutter</h3>
+            <p>A good QR menu should increase confidence and average spend, not just replace paper with a list of items.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="demo-section" id="table-flow">
+        <div class="demo-section-head">
+          <div>
+            <p class="demo-kicker">In-service flow</p>
+            <h2 class="demo-section-title">The app should support the staff, not replace the restaurant.</h2>
+          </div>
+        </div>
+        <div class="process-list">
+          <div class="process-step-card">
+            <strong>01</strong>
+            <div>
+              <h3>Scan and land on the right branch menu instantly</h3>
+              <p>Guests do not need to download anything. Table number, service time, and local availability are already attached.</p>
+            </div>
+          </div>
+          <div class="process-step-card">
+            <strong>02</strong>
+            <div>
+              <h3>Filter fast for dietary constraints and browsing mood</h3>
+              <p>Guests can move from categories to "show me something light and vegetarian" without asking staff to decode the menu.</p>
+            </div>
+          </div>
+          <div class="process-step-card">
+            <strong>03</strong>
+            <div>
+              <h3>Call the server only when human help adds value</h3>
+              <p>Service requests, refills, birthday plating, and bill prompts can be requested without breaking the meal rhythm.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="demo-section" id="benefits">
+        <div class="feature-band">
+          <article class="demo-card">
+            <small>Operational gain</small>
+            <div class="feature-checklist">
+              <div><strong>No reprint lag</strong><span>Seasonal dishes and sold-out items can be updated live.</span></div>
+              <div><strong>Cleaner table communication</strong><span>Special requests reach the team with context attached.</span></div>
+              <div><strong>Better upsells</strong><span>Desserts, pairings, and chef notes can be placed where they convert.</span></div>
+            </div>
+          </article>
+          <article class="quote-card">
+            <blockquote>"A QR menu should feel like part of the brand, not damage control after removing paper."</blockquote>
+            <cite>This demo is intentionally premium, legible, and mobile-native.</cite>
+          </article>
+        </div>
+      </section>
+
+      <footer class="footer-note">
+        Digital menu app demo for QR-first restaurant experiences.
+      </footer>
+    </main>
+  </div>
+</body>
+</html>

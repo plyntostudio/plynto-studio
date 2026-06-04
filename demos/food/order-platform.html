@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quick Ember | Online Order Platform Demo</title>
+  <meta name="description" content="Modern restaurant online ordering demo with category browsing, delivery zones, and live cart." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="demo.css" />
+</head>
+<body class="theme-order">
+  <div class="demo-page">
+    <header class="demo-topbar">
+      <div class="demo-topbar-inner">
+        <div class="demo-brand">Quick Ember</div>
+        <nav class="demo-nav">
+          <a class="demo-link" href="../../showcase.html">Showcase</a>
+          <a class="demo-link" href="fine-dining.html">Fine Dining</a>
+          <a class="demo-link is-active" href="order-platform.html">Ordering</a>
+          <a class="demo-link" href="digital-menu-app.html">Menu App</a>
+          <a class="demo-link" href="catering-events.html">Catering</a>
+          <a class="demo-link" href="multi-branch-brand.html">Multi-Branch</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="demo-shell">
+      <section class="demo-hero">
+        <span class="demo-kicker">Direct ordering without aggregator fees</span>
+        <div class="demo-grid demo-grid--hero">
+          <div>
+            <h1 class="demo-title">Takeout that feels <em>fast, clear, and craveable.</em></h1>
+            <p class="demo-copy">This demo is built for restaurants that want higher-margin direct orders. It combines category navigation, persuasive product cards, delivery service zones, and a sticky cart that converts on desktop and mobile.</p>
+            <div class="demo-actions">
+              <a class="demo-button demo-button--primary" href="#order-flow">Start an order</a>
+              <a class="demo-button demo-button--ghost" href="#zones">See service areas</a>
+            </div>
+            <div class="demo-anchor-nav">
+              <a href="#order-flow">Ordering flow</a>
+              <a href="#featured">Featured items</a>
+              <a href="#zones">Delivery zones</a>
+              <a href="#retention">Retention</a>
+            </div>
+          </div>
+          <div class="demo-panel hero-visual">
+            <div class="visual-stack">
+              <div class="visual-block visual-block--hero accent-card" style="display:grid; gap:18px;">
+                <div class="pill-row">
+                  <span class="pill">Delivery in 28 min</span>
+                  <span class="pill">Free dessert after Rs 899</span>
+                </div>
+                <div class="mock-text">
+                  <span></span><span></span><span></span>
+                </div>
+              </div>
+              <div class="visual-block visual-block--split">
+                <div>
+                  <small>Popular now</small>
+                  <h3>Smoked paneer taco trio</h3>
+                  <p class="demo-section-note">Designed to surface high-margin items and bundled combos.</p>
+                </div>
+                <div>
+                  <small>Retention</small>
+                  <h3>Repeat order banner</h3>
+                  <p class="demo-section-note">Smart nudges for regulars, scheduled meals, and one-tap reorder.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="demo-section">
+        <div class="service-belt">
+          <div>Live menu sync</div>
+          <div>Delivery scheduling</div>
+          <div>Coupon engine</div>
+          <div>Order tracking</div>
+          <div>Direct payments</div>
+        </div>
+      </section>
+
+      <section class="demo-section" id="order-flow">
+        <div class="demo-section-head">
+          <div>
+            <p class="demo-kicker">Ordering flow</p>
+            <h2 class="demo-section-title">Menu discovery on the left. Conversion on the right.</h2>
+          </div>
+          <p class="demo-section-note">The layout is intentionally built around speed: category jumps, strong product photography slots, price clarity, add-ons, and a cart that never disappears.</p>
+        </div>
+
+        <div class="order-shell">
+          <div class="grid-list">
+            <article class="demo-card product-card">
+              <small>Best seller</small>
+              <h3>Firepit Burger Combo</h3>
+              <p>Double smash patty, caramel onion, chipotle aioli, fries, and a citrus soda.</p>
+              <div class="price-line"><span>Combo meal</span><strong>Rs 429</strong></div>
+            </article>
+            <article class="demo-card product-card">
+              <small>Family box</small>
+              <h3>Sunday Roast Feast</h3>
+              <p>Four mains, three sides, house dip trio, and a shared dessert pack.</p>
+              <div class="price-line"><span>Serves 4</span><strong>Rs 1,480</strong></div>
+            </article>
+            <article class="demo-card product-card">
+              <small>High margin add-on</small>
+              <h3>Cold brew tiramisu jar</h3>
+              <p>One-click upsell at cart stage with a timed limited batch badge.</p>
+              <div class="price-line"><span>Dessert</span><strong>Rs 180</strong></div>
+            </article>
+          </div>
+
+          <aside class="demo-panel demo-card cart-card">
+            <small>Live cart</small>
+            <h3 style="margin:0 0 18px;">Your order</h3>
+            <div class="cart-line"><span>Firepit Burger Combo</span><strong>Rs 429</strong></div>
+            <div class="cart-line"><span>Loaded peri fries</span><strong>Rs 169</strong></div>
+            <div class="cart-line"><span>Tiramisu jar</span><strong>Rs 180</strong></div>
+            <div class="cart-line"><span>Delivery</span><strong>Rs 40</strong></div>
+            <div class="cart-line"><strong>Total</strong><strong>Rs 818</strong></div>
+            <div class="demo-actions">
+              <a class="demo-button demo-button--primary" href="#zones">Checkout flow</a>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="demo-section" id="featured">
+        <div class="metric-strip">
+          <div class="metric-tile"><strong>23%</strong><span>higher average order value with curated combos and timed upsells</span></div>
+          <div class="metric-tile"><strong>14 min</strong><span>average reorder flow for regular customers using saved meals</span></div>
+          <div class="metric-tile"><strong>3x</strong><span>more control over promotions compared to aggregator-only ordering</span></div>
+        </div>
+      </section>
+
+      <section class="demo-section" id="zones">
+        <div class="demo-section-head">
+          <div>
+            <p class="demo-kicker">Delivery intelligence</p>
+            <h2 class="demo-section-title">A local brand can feel operationally sharp online.</h2>
+          </div>
+        </div>
+        <div class="two-col">
+          <article class="demo-card feature-item">
+            <small>Service zones</small>
+            <h3>Neighborhood-based ETA logic</h3>
+            <p>South City in 22 min, Riverside in 31 min, Tech Park in 38 min. Slots can be turned on and off based on kitchen load.</p>
+          </article>
+          <article class="demo-card feature-item">
+            <small>Promotions</small>
+            <h3>Bundles that increase average order value</h3>
+            <p>Office lunch packs, late-night duo deals, and reorder campaigns for previous customers.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="demo-section" id="retention">
+        <div class="compare-grid">
+          <article class="compare-card">
+            <small>Retention loops</small>
+            <h3 style="margin:0;">What keeps customers ordering direct</h3>
+            <ul>
+              <li>Saved favorite meals and office lunch presets</li>
+              <li>Scheduled repeat orders for high-frequency customers</li>
+              <li>Post-order dessert or beverage upsells before dispatch</li>
+              <li>Smart coupons tied to low-demand slots</li>
+            </ul>
+          </article>
+          <article class="compare-card">
+            <small>Ops benefits</small>
+            <h3 style="margin:0;">What the restaurant team gains</h3>
+            <ul>
+              <li>Better margin on direct orders</li>
+              <li>Cleaner customer data for campaigns</li>
+              <li>Control over delivery zones and kitchen pacing</li>
+              <li>Brand experience that doesn't disappear inside an aggregator</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <footer class="footer-note">
+        Online ordering platform demo focused on speed, clarity, and direct conversion.
+      </footer>
+    </main>
+  </div>
+</body>
+</html>
