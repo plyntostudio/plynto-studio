@@ -7,551 +7,98 @@
   <meta name="description" content="Browse example websites and apps across every niche — restaurants, clinics, e-commerce, SaaS, portfolios, and more. See what Plynto Studio can build for you." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Outfit:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;450;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
   <style>
+    /* ─── SHOWCASE PAGE OVERRIDES ─────────────────────── */
     :root {
       --accent: var(--green);
       --accent-glow: var(--green-dim);
       --text-primary: var(--text-1);
       --text-secondary: var(--text-2);
       --text-subtle: var(--text-3);
-      --text-muted: var(--text-2);
       --ink: var(--text-1);
       --ink-soft: var(--text-2);
       --bg-dim: var(--bg-1);
     }
 
-    .nav-link-active {
-      color: var(--text-1) !important;
-      background: var(--surface);
-    }
-
-    /* ─── SHOWCASE PAGE STYLES ──────────────────────────────────── */
+    /* ─── HERO ─────────────────────────────────────────── */
     .sc-hero {
-      padding: calc(var(--nav-h) + 80px) 0 80px;
+      padding: calc(var(--nav-h) + 72px) 0 0;
       border-bottom: 1px solid var(--line);
       position: relative;
       overflow: hidden;
     }
-    .sc-hero .hero-glow--1 {
-      top: -100px; right: 10%;
-      width: 500px; height: 500px;
-    }
     .sc-hero-inner {
-      max-width: 1120px;
+      max-width: 1180px;
       margin: 0 auto;
-      padding: 0 36px;
+      padding: 0 44px 64px;
     }
-    .sc-hero-badge {
+    @media (max-width: 600px) { .sc-hero-inner { padding: 0 20px 48px; } }
+
+    .sc-hero-label {
       display: inline-flex;
       align-items: center;
-      gap: 9px;
-      background: rgba(29, 185, 84, 0.08);
-      border: 1px solid rgba(29, 185, 84, 0.2);
-      color: #1DB954;
-      font-family: 'Space Mono', monospace;
-      font-size: 10px;
+      gap: 8px;
+      background: var(--surface);
+      border: 1px solid var(--line-hi);
+      color: var(--text-4);
+      font-size: 10.5px;
+      font-weight: 500;
       letter-spacing: 1.5px;
       text-transform: uppercase;
-      padding: 7px 16px;
-      border-radius: 100px;
-      margin-bottom: 36px;
-      width: fit-content;
+      padding: 6px 14px;
+      border-radius: 6px;
+      margin-bottom: 30px;
+    }
+    .sc-hero-label-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--green);
     }
     .sc-hero h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(42px, 6vw, 88px);
-      font-weight: 700;
-      line-height: 1.0;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(44px, 7vw, 86px);
+      font-weight: 600;
+      line-height: 0.95;
       letter-spacing: -2px;
       color: var(--text-primary);
-      margin-bottom: 24px;
+      margin-bottom: 22px;
     }
     .sc-hero h1 em {
       font-style: italic;
       font-weight: 400;
-      color: var(--text-muted);
+      color: var(--text-subtle);
     }
     .sc-hero-sub {
-      font-size: 16px;
-      color: var(--text-secondary);
-      font-weight: 300;
-      line-height: 1.8;
-      max-width: 540px;
-      margin-bottom: 48px;
+      font-size: 15px;
+      color: var(--text-subtle);
+      font-weight: 400;
+      line-height: 1.85;
+      max-width: 500px;
+      margin-bottom: 40px;
     }
     .sc-hero-meta {
       display: flex;
       align-items: center;
-      gap: 32px;
+      gap: 24px;
       flex-wrap: wrap;
     }
     .sc-hero-meta-item {
       display: flex;
       align-items: center;
-      gap: 8px;
-      font-family: 'Space Mono', monospace;
-      font-size: 10px;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      color: var(--text-subtle);
-    }
-    .sc-hero-meta-item svg {
-      color: #1DB954;
-    }
-
-    /* Filter bar */
-    .sc-filters {
-      padding: 32px 0;
-      border-bottom: 1px solid var(--line);
-      position: sticky;
-      top: var(--nav-h);
-      z-index: 100;
-      background: var(--bg);
-      backdrop-filter: blur(24px);
-    }
-    .sc-filters-inner {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 0 36px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      overflow-x: auto;
-      scrollbar-width: none;
-    }
-    .sc-filters-inner::-webkit-scrollbar { display: none; }
-    .sc-filter-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 8px 18px;
-      border-radius: 100px;
-      border: 1px solid var(--line-md);
-      background: transparent;
-      color: var(--text-secondary);
-      font-family: 'Outfit', sans-serif;
-      font-size: 12.5px;
-      font-weight: 400;
-      white-space: nowrap;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .sc-filter-btn:hover {
-      border-color: var(--accent);
-      color: var(--text-primary);
-    }
-    .sc-filter-btn.active {
-      background: var(--accent);
-      border-color: var(--accent);
-      color: #fff;
-      font-weight: 500;
-    }
-    .sc-filter-count {
-      font-size: 10px;
-      opacity: 0.65;
-    }
-
-    /* Main grid */
-    .sc-main {
-      padding: 72px 0 120px;
-    }
-    .sc-main-inner {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 0 36px;
-    }
-    .sc-section {
-      margin-bottom: 96px;
-    }
-    .sc-section-header {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      margin-bottom: 36px;
-      padding-bottom: 20px;
-      border-bottom: 1px solid var(--line);
-    }
-    .sc-section-label {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-    .sc-section-icon {
-      width: 40px; height: 40px;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      background: var(--surface);
-      border: 1px solid var(--line);
-    }
-    .sc-section-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 26px;
-      font-weight: 700;
-      color: var(--text-primary);
-      letter-spacing: -0.3px;
-    }
-    .sc-section-count {
-      font-family: 'Space Mono', monospace;
-      font-size: 10px;
-      letter-spacing: 1px;
-      color: var(--text-subtle);
-      text-transform: uppercase;
-    }
-    .sc-section-link {
-      font-family: 'Outfit', sans-serif;
-      font-size: 13px;
-      color: var(--accent);
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      transition: opacity 0.2s;
-    }
-    .sc-section-link:hover { opacity: 0.75; }
-
-    /* Cards */
-    .sc-cards {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-    }
-    .sc-cards--2col {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    .sc-card {
-      border-radius: 12px;
-      overflow: hidden;
-      border: 1px solid var(--line);
-      background: var(--surface);
-      transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
-      cursor: pointer;
-      text-decoration: none;
-      display: block;
-    }
-    .sc-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 16px 48px rgba(0,0,0,0.35);
-      border-color: var(--line-md);
-    }
-    .sc-card-preview {
-      aspect-ratio: 16/10;
-      position: relative;
-      overflow: hidden;
-    }
-    .sc-card-meta {
-      padding: 16px 18px 18px;
-    }
-    .sc-card-type {
-      font-family: 'Space Mono', monospace;
-      font-size: 9px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 6px;
-      display: block;
-    }
-    .sc-card-name {
-      font-family: 'Playfair Display', serif;
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--text-primary);
-      margin-bottom: 4px;
-    }
-    .sc-card-desc {
+      gap: 7px;
       font-size: 12px;
-      color: var(--text-subtle);
-      line-height: 1.6;
-      font-weight: 300;
-    }
-    .sc-card-tags {
-      display: flex;
-      gap: 5px;
-      flex-wrap: wrap;
-      margin-top: 10px;
-    }
-    .sc-card-tags span {
-      font-size: 9px;
-      font-family: 'Space Mono', monospace;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-      padding: 3px 9px;
-      border-radius: 100px;
-      border: 1px solid var(--line-md);
-      color: var(--text-subtle);
-    }
-    .sc-card-cta {
-      position: absolute;
-      inset: 0;
-      background: rgba(29,185,84,0.9);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      transition: opacity 0.25s;
-      font-family: 'Outfit', sans-serif;
-      font-size: 13px;
-      font-weight: 600;
-      color: #fff;
-      letter-spacing: 0.2px;
-    }
-    .sc-card:hover .sc-card-cta { opacity: 1; }
-
-    /* ─── Mockup preview styles ─────────────────────────────────── */
-    /* Each card has a custom CSS-drawn mockup in its preview area */
-    .mock {
-      position: absolute;
-      inset: 0;
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      font-family: 'Outfit', sans-serif;
-      overflow: hidden;
-    }
-    .mock-bar {
-      height: 6px;
-      border-radius: 3px;
-      background: currentColor;
-      opacity: 0.18;
-    }
-    .mock-bar--title {
-      height: 10px;
-      width: 60%;
-      opacity: 0.35;
-    }
-    .mock-bar--short { width: 40%; }
-    .mock-bar--med { width: 55%; }
-    .mock-bar--wide { width: 85%; }
-
-    .mock-hero {
-      flex: 1;
-      border-radius: 6px;
-      background: currentColor;
-      opacity: 0.08;
-      position: relative;
-      overflow: hidden;
-    }
-    .mock-hero::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, currentColor 0%, transparent 60%);
-      opacity: 0.25;
-    }
-    .mock-nav {
-      height: 20px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      margin-bottom: 4px;
-    }
-    .mock-nav-logo {
-      width: 50px; height: 7px;
-      border-radius: 3px;
-      background: currentColor;
-      opacity: 0.5;
-    }
-    .mock-nav-links {
-      display: flex;
-      gap: 4px;
-      margin-left: auto;
-    }
-    .mock-nav-links span {
-      width: 28px; height: 5px;
-      border-radius: 2px;
-      background: currentColor;
-      opacity: 0.2;
-    }
-    .mock-nav-cta {
-      width: 36px; height: 14px;
-      border-radius: 3px;
-      background: currentColor;
-      opacity: 0.4;
-      margin-left: 6px;
-    }
-    .mock-grid {
-      display: grid;
-      gap: 5px;
-      margin-top: 4px;
-    }
-    .mock-grid--2 { grid-template-columns: 1fr 1fr; }
-    .mock-grid--3 { grid-template-columns: 1fr 1fr 1fr; }
-    .mock-grid span {
-      height: 36px;
-      border-radius: 4px;
-      background: currentColor;
-      opacity: 0.1;
-    }
-    .mock-card-row {
-      display: flex;
-      gap: 5px;
-      margin-top: 4px;
-    }
-    .mock-card {
-      flex: 1;
-      height: 44px;
-      border-radius: 5px;
-      background: currentColor;
-      opacity: 0.1;
-    }
-    .mock-img-text {
-      display: flex;
-      gap: 8px;
-      align-items: flex-start;
-      flex: 1;
-    }
-    .mock-img-block {
-      width: 52px;
-      border-radius: 5px;
-      background: currentColor;
-      opacity: 0.2;
-      flex-shrink: 0;
-      align-self: stretch;
-    }
-    .mock-text-lines {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-      padding-top: 3px;
-    }
-
-    /* Specific color themes per category */
-    .sc-card--restaurant .mock { color: #ff6b35; }
-    .sc-card--restaurant .sc-card-preview { background: linear-gradient(135deg, #1a0f08 0%, #2d1a0e 100%); }
-
-    .sc-card--saas .mock { color: #0ea5e9; }
-    .sc-card--saas .sc-card-preview { background: linear-gradient(135deg, #071929 0%, #0c2035 100%); }
-
-    .sc-card--ecommerce .mock { color: #f59e0b; }
-    .sc-card--ecommerce .sc-card-preview { background: linear-gradient(135deg, #1a1208 0%, #261b0b 100%); }
-
-    .sc-card--clinic .mock { color: #22c55e; }
-    .sc-card--clinic .sc-card-preview { background: linear-gradient(135deg, #071a10 0%, #0d2318 100%); }
-
-    .sc-card--portfolio .mock { color: #a855f7; }
-    .sc-card--portfolio .sc-card-preview { background: linear-gradient(135deg, #120a1f 0%, #1c1030 100%); }
-
-    .sc-card--fintech .mock { color: #1DB954; }
-    .sc-card--fintech .sc-card-preview { background: linear-gradient(135deg, #081a0e 0%, #0f2618 100%); }
-
-    .sc-card--realestate .mock { color: #f97316; }
-    .sc-card--realestate .sc-card-preview { background: linear-gradient(135deg, #1a0e05 0%, #28160b 100%); }
-
-    .sc-card--education .mock { color: #3b82f6; }
-    .sc-card--education .sc-card-preview { background: linear-gradient(135deg, #080e1f 0%, #101b33 100%); }
-
-    .sc-card--logistics .mock { color: #94a3b8; }
-    .sc-card--logistics .sc-card-preview { background: linear-gradient(135deg, #0e1117 0%, #161c27 100%); }
-
-    .sc-card--hospitality .mock { color: #ec4899; }
-    .sc-card--hospitality .sc-card-preview { background: linear-gradient(135deg, #1a0910 0%, #280f1a 100%); }
-
-    .sc-card--app .mock { color: #8b5cf6; }
-    .sc-card--app .sc-card-preview { background: linear-gradient(135deg, #10081f 0%, #18102e 100%); }
-
-    .sc-card--ngo .mock { color: #10b981; }
-    .sc-card--ngo .sc-card-preview { background: linear-gradient(135deg, #071510 0%, #0c1e17 100%); }
-
-    /* Platform chips */
-    .sc-platform-row {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-bottom: 72px;
-    }
-    .sc-platform-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 20px;
-      border-radius: 100px;
-      background: var(--surface);
-      border: 1px solid var(--line);
-      font-family: 'Outfit', sans-serif;
-      font-size: 13px;
+      color: var(--text-4);
       font-weight: 400;
-      color: var(--text-secondary);
-      text-decoration: none;
-      transition: all 0.2s;
     }
-    .sc-platform-chip:hover {
-      border-color: var(--accent);
-      color: var(--text-primary);
-    }
-    .sc-platform-chip-dot {
-      width: 7px; height: 7px;
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
+    .sc-hero-meta-item svg { color: var(--green); opacity: 0.8; }
 
-    /* Bottom CTA */
-    .sc-bottom-cta {
-      padding: 96px 0 120px;
-      border-top: 1px solid var(--line);
-    }
-    .sc-bottom-cta-inner {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 0 36px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      gap: 24px;
-    }
-    .sc-bottom-cta h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(32px, 4.5vw, 60px);
-      font-weight: 700;
-      color: var(--text-primary);
-      letter-spacing: -0.8px;
-      line-height: 1.05;
-    }
-    .sc-bottom-cta h2 em {
-      font-style: italic;
-      font-weight: 400;
-      color: var(--text-muted);
-    }
-    .sc-bottom-cta p {
-      font-size: 15px;
-      color: var(--text-secondary);
-      line-height: 1.8;
-      font-weight: 300;
-      max-width: 480px;
-    }
-    .sc-bottom-cta-actions {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin-top: 8px;
-    }
-
-    /* Responsive */
-    @media (max-width: 900px) {
-      .sc-cards { grid-template-columns: 1fr 1fr; }
-      .sc-cards--2col { grid-template-columns: 1fr; }
-    }
-    @media (max-width: 600px) {
-      .sc-cards, .sc-cards--2col { grid-template-columns: 1fr; }
-      .sc-hero h1 { letter-spacing: -1px; }
-      .sc-section-header { flex-direction: column; align-items: flex-start; gap: 12px; }
-      .sc-main-inner, .sc-hero-inner, .sc-bottom-cta-inner { padding: 0 20px; }
-      .sc-filters-inner { padding: 0 20px; }
-    }
-
-    /* ─── HERO STATS BAR ─────────────────────────────────── */
+    /* Stats bar */
     .sc-hero-stats {
       display: flex;
       align-items: stretch;
       border-top: 1px solid var(--line);
-      margin-top: 64px;
       background: var(--bg-dim);
     }
     .sc-hero-stat {
@@ -559,91 +106,418 @@
       display: flex;
       flex-direction: column;
       gap: 3px;
-      padding: 22px 36px;
+      padding: 20px 36px;
       border-right: 1px solid var(--line);
     }
     .sc-hero-stat:last-child { border-right: none; }
     .sc-hero-stat-n {
-      font-family: 'Playfair Display', serif;
-      font-size: 28px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 30px;
       font-weight: 700;
       color: var(--ink);
       letter-spacing: -0.5px;
+      line-height: 1;
     }
-    .sc-hero-stat-n span { font-size: 15px; color: var(--accent); }
-    .sc-hero-stat-l {
-      font-size: 11px;
-      color: var(--ink-soft);
-      letter-spacing: 0.3px;
-    }
+    .sc-hero-stat-n span { font-size: 14px; color: var(--green); font-weight: 600; }
+    .sc-hero-stat-l { font-size: 11px; color: var(--text-4); letter-spacing: 0.2px; margin-top: 3px; }
     @media (max-width: 640px) {
       .sc-hero-stats { flex-wrap: wrap; }
-      .sc-hero-stat { flex: 1 1 45%; border-bottom: 1px solid var(--line); padding: 16px 20px; }
-      .sc-hero-stat:last-child { border-bottom: none; }
+      .sc-hero-stat { flex: 1 1 45%; border-bottom: 1px solid var(--line); padding: 14px 18px; }
     }
 
-    /* ─── CUSTOM NICHE CARD ───────────────────────────────── */
-    .sc-custom-card {
-      border-radius: 12px;
-      border: 1px dashed var(--line-md);
-      background: var(--bg-dim);
-      padding: 40px 36px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      gap: 16px;
-      transition: border-color 0.2s, background 0.2s;
-      text-decoration: none;
-      margin-top: 16px;
+    /* ─── FILTER BAR ────────────────────────────────────── */
+    .sc-filters {
+      padding: 0;
+      border-bottom: 1px solid var(--line);
+      position: sticky;
+      top: var(--nav-h);
+      z-index: 100;
+      background: rgba(9,9,11,0.96);
+      backdrop-filter: blur(20px);
     }
-    .sc-custom-card:hover { border-color: var(--accent); background: var(--accent-glow); }
-    .sc-custom-card-icon {
-      width: 48px; height: 48px;
-      border-radius: 12px;
-      background: var(--accent-glow);
-      border: 1px solid rgba(200,92,40,0.2);
+    .sc-filters-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 44px;
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      height: 52px;
+    }
+    .sc-filters-inner::-webkit-scrollbar { display: none; }
+    @media (max-width: 600px) { .sc-filters-inner { padding: 0 16px; } }
+    .sc-filter-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 6px 14px;
+      border-radius: 6px;
+      border: 1px solid transparent;
+      background: transparent;
+      color: var(--text-4);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 450;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: all 0.18s;
+      letter-spacing: 0.1px;
+    }
+    .sc-filter-btn:hover { color: var(--text-2); background: var(--surface); }
+    .sc-filter-btn.active {
+      background: var(--surface-2);
+      border-color: var(--line-hi);
+      color: var(--text-1);
+      font-weight: 500;
+    }
+    .sc-filter-count { font-size: 10px; opacity: 0.5; }
+    .sc-filter-btn.active .sc-filter-count { opacity: 0.7; }
+
+    /* ─── MAIN GRID ─────────────────────────────────────── */
+    .sc-main { padding: 64px 0 120px; }
+    .sc-main-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 44px;
+    }
+    @media (max-width: 600px) { .sc-main-inner { padding: 0 16px; } }
+
+    .sc-section { margin-bottom: 88px; }
+    .sc-section-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 28px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--line);
+    }
+    .sc-section-label { display: flex; align-items: center; gap: 12px; }
+    .sc-section-icon {
+      width: 36px; height: 36px;
+      border-radius: 9px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 22px;
+      font-size: 16px;
+      background: var(--surface);
+      border: 1px solid var(--line);
     }
-    .sc-custom-card h4 {
-      font-family: 'Playfair Display', serif;
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--ink);
+    .sc-section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--text-primary);
       letter-spacing: -0.2px;
     }
-    .sc-custom-card p {
-      font-size: 13px;
-      color: var(--ink-soft);
-      line-height: 1.7;
-      font-weight: 300;
-      max-width: 240px;
+    .sc-section-count { font-size: 10.5px; color: var(--text-4); margin-top: 1px; }
+    .sc-section-link {
+      font-size: 12.5px;
+      color: var(--text-4);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: color 0.18s;
+      font-weight: 400;
     }
-    .sc-custom-cta {
-      font-family: 'Space Mono', monospace;
-      font-size: 10px;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: var(--accent);
+    .sc-section-link:hover { color: var(--text-2); }
+
+    /* ─── CARDS ─────────────────────────────────────────── */
+    .sc-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .sc-cards--2col { grid-template-columns: repeat(2, 1fr); }
+    @media (max-width: 900px) {
+      .sc-cards { grid-template-columns: 1fr 1fr; }
+      .sc-cards--2col { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 560px) {
+      .sc-cards, .sc-cards--2col { grid-template-columns: 1fr; }
     }
 
-    /* ─── CARD SHINE ──────────────────────────────────────── */
+    .sc-card {
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: var(--bg-card);
+      transition: transform 0.25s var(--ease-out), box-shadow 0.25s, border-color 0.25s;
+      cursor: pointer;
+      text-decoration: none;
+      display: block;
+    }
+    .sc-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+      border-color: var(--line-md);
+    }
+    .sc-card-preview {
+      aspect-ratio: 16/10;
+      position: relative;
+      overflow: hidden;
+    }
     .sc-card-preview::after {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(135deg, rgba(255,255,255,0.04) 0%, transparent 50%);
+      background: linear-gradient(160deg, rgba(255,255,255,0.03) 0%, transparent 60%);
       pointer-events: none;
     }
+    .sc-card-meta { padding: 14px 16px 16px; }
+    .sc-card-type {
+      font-size: 9px;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 5px;
+      display: block;
+      font-weight: 600;
+      opacity: 0.8;
+    }
+    .sc-card-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+      letter-spacing: -0.1px;
+    }
+    .sc-card-desc { font-size: 12px; color: var(--text-subtle); line-height: 1.65; font-weight: 400; }
+    .sc-card-tags {
+      display: flex;
+      gap: 5px;
+      flex-wrap: wrap;
+      margin-top: 9px;
+    }
+    .sc-card-tags span {
+      font-size: 9px;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 4px;
+      border: 1px solid var(--line);
+      color: var(--text-4);
+      font-weight: 500;
+    }
+    .sc-card-cta {
+      position: absolute;
+      inset: 0;
+      background: rgba(9,9,11,0.82);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.22s;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-1);
+      letter-spacing: 0.1px;
+      backdrop-filter: blur(4px);
+      gap: 8px;
+    }
+    .sc-card-cta::after {
+      content: '→';
+      color: var(--green);
+    }
+    .sc-card:hover .sc-card-cta { opacity: 1; }
 
-    /* ─── FILTER IMPROVEMENTS ─────────────────────────────── */
-    .sc-filter-btn.active .sc-filter-count {
-      background: rgba(255,255,255,0.2);
-      border-radius: 100px;
-      padding: 0 5px;
+    /* ─── MOCKUP PREVIEWS ───────────────────────────────── */
+    .mock {
+      position: absolute;
+      inset: 0;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      overflow: hidden;
+    }
+    .mock-bar {
+      height: 5px;
+      border-radius: 2px;
+      background: currentColor;
+      opacity: 0.15;
+    }
+    .mock-bar--title { height: 9px; width: 55%; opacity: 0.3; }
+    .mock-bar--short { width: 35%; }
+    .mock-bar--med { width: 50%; }
+    .mock-bar--wide { width: 80%; }
+    .mock-hero {
+      flex: 1;
+      border-radius: 5px;
+      background: currentColor;
+      opacity: 0.07;
+      position: relative;
+      overflow: hidden;
+    }
+    .mock-hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, currentColor 0%, transparent 55%);
+      opacity: 0.2;
+    }
+    .mock-nav {
+      height: 18px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin-bottom: 3px;
+    }
+    .mock-nav-logo { width: 44px; height: 6px; border-radius: 2px; background: currentColor; opacity: 0.45; }
+    .mock-nav-links { display: flex; gap: 3px; margin-left: auto; }
+    .mock-nav-links span { width: 24px; height: 4px; border-radius: 2px; background: currentColor; opacity: 0.18; }
+    .mock-nav-cta { width: 32px; height: 12px; border-radius: 3px; background: currentColor; opacity: 0.35; margin-left: 5px; }
+    .mock-grid { display: grid; gap: 4px; margin-top: 4px; }
+    .mock-grid--2 { grid-template-columns: 1fr 1fr; }
+    .mock-grid--3 { grid-template-columns: 1fr 1fr 1fr; }
+    .mock-grid span { height: 32px; border-radius: 4px; background: currentColor; opacity: 0.09; }
+    .mock-card-row { display: flex; gap: 4px; margin-top: 4px; }
+    .mock-card { flex: 1; height: 40px; border-radius: 4px; background: currentColor; opacity: 0.09; }
+    .mock-img-text { display: flex; gap: 7px; align-items: flex-start; flex: 1; }
+    .mock-img-block { width: 48px; border-radius: 4px; background: currentColor; opacity: 0.18; flex-shrink: 0; align-self: stretch; }
+    .mock-text-lines { flex: 1; display: flex; flex-direction: column; gap: 4px; padding-top: 2px; }
+
+    /* Category color themes */
+    .sc-card--restaurant .mock { color: #fb923c; }
+    .sc-card--restaurant .sc-card-preview { background: linear-gradient(135deg, #160c04 0%, #231308 100%); }
+    .sc-card--saas .mock { color: #38bdf8; }
+    .sc-card--saas .sc-card-preview { background: linear-gradient(135deg, #04111e 0%, #071929 100%); }
+    .sc-card--ecommerce .mock { color: #fbbf24; }
+    .sc-card--ecommerce .sc-card-preview { background: linear-gradient(135deg, #151005 0%, #201808 100%); }
+    .sc-card--clinic .mock { color: #4ade80; }
+    .sc-card--clinic .sc-card-preview { background: linear-gradient(135deg, #04120a 0%, #081a0e 100%); }
+    .sc-card--portfolio .mock { color: #c084fc; }
+    .sc-card--portfolio .sc-card-preview { background: linear-gradient(135deg, #0f0718 0%, #180d26 100%); }
+    .sc-card--fintech .mock { color: #34d399; }
+    .sc-card--fintech .sc-card-preview { background: linear-gradient(135deg, #041209 0%, #071a0e 100%); }
+    .sc-card--realestate .mock { color: #fb923c; }
+    .sc-card--realestate .sc-card-preview { background: linear-gradient(135deg, #160a03 0%, #231208 100%); }
+    .sc-card--education .mock { color: #60a5fa; }
+    .sc-card--education .sc-card-preview { background: linear-gradient(135deg, #050b1c 0%, #0a1430 100%); }
+    .sc-card--logistics .mock { color: #94a3b8; }
+    .sc-card--logistics .sc-card-preview { background: linear-gradient(135deg, #0b0d12 0%, #111520 100%); }
+    .sc-card--hospitality .mock { color: #f472b6; }
+    .sc-card--hospitality .sc-card-preview { background: linear-gradient(135deg, #16060e 0%, #230d18 100%); }
+    .sc-card--app .mock { color: #a78bfa; }
+    .sc-card--app .sc-card-preview { background: linear-gradient(135deg, #0c0518 0%, #150a28 100%); }
+    .sc-card--ngo .mock { color: #2dd4bf; }
+    .sc-card--ngo .sc-card-preview { background: linear-gradient(135deg, #04100f 0%, #071816 100%); }
+
+    /* ─── PLATFORM CHIPS ────────────────────────────────── */
+    .sc-platform-row { display: flex; gap: 7px; flex-wrap: wrap; margin-bottom: 64px; }
+    .sc-platform-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 16px;
+      border-radius: 6px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      font-size: 12.5px;
+      font-weight: 400;
+      color: var(--text-3);
+      text-decoration: none;
+      transition: all 0.18s;
+      letter-spacing: 0.1px;
+    }
+    .sc-platform-chip:hover { border-color: var(--line-hi); color: var(--text-1); }
+    .sc-platform-chip-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+
+    /* ─── CUSTOM CARD ───────────────────────────────────── */
+    .sc-custom-card {
+      border-radius: var(--r-lg);
+      border: 1px dashed var(--line-md);
+      background: var(--bg-dim);
+      padding: 36px 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 14px;
+      transition: border-color 0.2s, background 0.2s;
+      text-decoration: none;
+      margin-top: 14px;
+    }
+    .sc-custom-card:hover { border-color: var(--green-brd); background: var(--green-dim); }
+    .sc-custom-card-icon {
+      width: 44px; height: 44px;
+      border-radius: 11px;
+      background: var(--surface);
+      border: 1px solid var(--line-hi);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+    .sc-custom-card h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 19px;
+      font-weight: 600;
+      color: var(--ink);
+    }
+    .sc-custom-card p { font-size: 12.5px; color: var(--text-3); line-height: 1.7; max-width: 220px; }
+    .sc-custom-cta {
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--green);
+      opacity: 0.75;
+    }
+
+    /* ─── BOTTOM CTA ────────────────────────────────────── */
+    .sc-bottom-cta {
+      padding: 88px 0 120px;
+      border-top: 1px solid var(--line);
+    }
+    .sc-bottom-cta-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 44px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 20px;
+    }
+    @media (max-width: 600px) { .sc-bottom-cta-inner { padding: 0 20px; } }
+    .sc-bottom-cta .eyebrow { margin-bottom: 4px; }
+    .sc-bottom-cta h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(34px, 5vw, 64px);
+      font-weight: 600;
+      color: var(--text-primary);
+      letter-spacing: -1px;
+      line-height: 1.0;
+    }
+    .sc-bottom-cta h2 em { font-style: italic; font-weight: 400; color: var(--text-subtle); }
+    .sc-bottom-cta p {
+      font-size: 14.5px;
+      color: var(--text-3);
+      line-height: 1.85;
+      max-width: 440px;
+    }
+    .sc-bottom-cta-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 6px;
+    }
+
+    /* ─── HERO GLOW ─────────────────────────────────────── */
+    .hero-glow--1 {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.2;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(74,222,128,0.4) 0%, transparent 70%);
+      top: -100px; right: 10%;
+      pointer-events: none;
     }
   </style>
 </head>
@@ -661,11 +535,10 @@
       <div class="nav-right">
         <span class="nav-status">
           <span class="live-dot"></span>
-          Available
+          Available for projects
         </span>
         <a class="nav-cta" href="https://wa.me/918134877412?text=Hi%20Plynto%20Studio!%20I%20saw%20your%20showcase%20and%20I%27m%20interested." target="_blank" rel="noopener">
           Start a project
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </a>
       </div>
       <button class="nav-hamburger" id="hamburger" aria-label="Menu">
@@ -676,16 +549,16 @@
       <a href="index.html#services">Services</a>
       <a href="index.html#process">Process</a>
       <a href="showcase.html">Showcase</a>
-      <a class="mobile-cta" href="https://wa.me/918134877412" target="_blank" rel="noopener">Start a project -></a>
+      <a class="mobile-cta" href="https://wa.me/918134877412" target="_blank" rel="noopener">Start a project</a>
     </div>
   </nav>
 
   <!-- HERO -->
   <section class="sc-hero">
-    <div class="hero-bg-grid" aria-hidden="true"></div>
+    <div class="hero-glow--1" aria-hidden="true"></div>
     <div class="sc-hero-inner">
-      <div class="sc-hero-badge" data-reveal>
-        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      <div class="sc-hero-label" data-reveal>
+        <span class="sc-hero-label-dot"></span>
         Design Showcase
       </div>
       <h1 data-reveal>
@@ -696,15 +569,15 @@
       </p>
       <div class="sc-hero-meta" data-reveal>
         <div class="sc-hero-meta-item">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="3" x2="9" y2="21"/></svg>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="3" x2="9" y2="21"/></svg>
           12 industry categories
         </div>
         <div class="sc-hero-meta-item">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/></svg>
-          Web + Mobile + App
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/></svg>
+          Web · Mobile · App
         </div>
         <div class="sc-hero-meta-item">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           Fixed price, any niche
         </div>
       </div>
@@ -715,7 +588,7 @@
         <div class="sc-hero-stat-l">Example designs</div>
       </div>
       <div class="sc-hero-stat">
-        <div class="sc-hero-stat-n">12<span></span></div>
+        <div class="sc-hero-stat-n">12</div>
         <div class="sc-hero-stat-l">Industry categories</div>
       </div>
       <div class="sc-hero-stat">
@@ -752,21 +625,21 @@
     <div class="sc-main-inner">
 
       <!-- Platforms overview row -->
-      <div style="margin-bottom: 64px; padding-top: 8px;" data-reveal>
-        <div class="eyebrow" style="margin-bottom: 20px;">Platforms we build for</div>
+      <div style="margin-bottom: 60px; padding-top: 4px;" data-reveal>
+        <div class="eyebrow" style="margin-bottom: 16px;">Platforms we build for</div>
         <div class="sc-platform-row">
-          <a href="#food" class="sc-platform-chip"><span class="sc-platform-chip-dot" style="background:#ff6b35"></span>Restaurants &amp; Food</a>
-          <a href="#saas" class="sc-platform-chip"><span class="sc-platform-chip-dot" style="background:#0ea5e9"></span>SaaS &amp; Software</a>
-          <a href="#ecommerce" class="sc-platform-chip"><span class="sc-platform-chip-dot" style="background:#f59e0b"></span>E-commerce &amp; Retail</a>
-          <a href="#health" class="sc-platform-chip"><span class="sc-platform-chip-dot" style="background:#22c55e"></span>Clinics &amp; Health</a>
-          <a href="#fintech" class="sc-platform-chip"><span class="sc-platform-chip-dot" style="background:#1DB954"></span>Fintech &amp; NBFC</a>
-          <a href="#education" class="sc-platform-chip"><span class="sc-platform-chip-dot" style="background:#3b82f6"></span>Education &amp; EdTech</a>
-          <a href="#realestate" class="sc-platform-chip"><span class="sc-platform-chip-dot" style="background:#f97316"></span>Real Estate</a>
-          <a href="#portfolio" class="sc-platform-chip"><span class="sc-platform-chip-dot" style="background:#a855f7"></span>Portfolios &amp; Personal</a>
+          <a href="#food" class="sc-platform-chip"><span class="sc-platform-chip-dot" style="background:#fb923c"></span>Restaurants &amp; Food</a>
+          <a href="#saas" class="sc-platform-chip"><span class="sc-platform-chip-dot" style="background:#38bdf8"></span>SaaS &amp; Software</a>
+          <a href="#ecommerce" class="sc-platform-chip"><span class="sc-platform-chip-dot" style="background:#fbbf24"></span>E-commerce &amp; Retail</a>
+          <a href="#health" class="sc-platform-chip"><span class="sc-platform-chip-dot" style="background:#4ade80"></span>Clinics &amp; Health</a>
+          <a href="#fintech" class="sc-platform-chip"><span class="sc-platform-chip-dot" style="background:#34d399"></span>Fintech &amp; NBFC</a>
+          <a href="#education" class="sc-platform-chip"><span class="sc-platform-chip-dot" style="background:#60a5fa"></span>Education &amp; EdTech</a>
+          <a href="#realestate" class="sc-platform-chip"><span class="sc-platform-chip-dot" style="background:#fb923c"></span>Real Estate</a>
+          <a href="#portfolio" class="sc-platform-chip"><span class="sc-platform-chip-dot" style="background:#c084fc"></span>Portfolios &amp; Personal</a>
           <a href="#logistics" class="sc-platform-chip"><span class="sc-platform-chip-dot" style="background:#94a3b8"></span>Logistics &amp; Supply</a>
-          <a href="#ngo" class="sc-platform-chip"><span class="sc-platform-chip-dot" style="background:#10b981"></span>NGO &amp; Social</a>
-          <a href="#app" class="sc-platform-chip"><span class="sc-platform-chip-dot" style="background:#8b5cf6"></span>Mobile Applications</a>
-          <a href="#hospitality" class="sc-platform-chip"><span class="sc-platform-chip-dot" style="background:#ec4899"></span>Hotels &amp; Hospitality</a>
+          <a href="#ngo" class="sc-platform-chip"><span class="sc-platform-chip-dot" style="background:#2dd4bf"></span>NGO &amp; Social</a>
+          <a href="#app" class="sc-platform-chip"><span class="sc-platform-chip-dot" style="background:#a78bfa"></span>Mobile Applications</a>
+          <a href="#hospitality" class="sc-platform-chip"><span class="sc-platform-chip-dot" style="background:#f472b6"></span>Hotels &amp; Hospitality</a>
         </div>
       </div>
 
@@ -780,10 +653,7 @@
               <div class="sc-section-count">5 examples</div>
             </div>
           </div>
-          <a href="demos/food/fine-dining/index.html" class="sc-section-link">
-            View demos
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </a>
+          <a href="demos/food/fine-dining/index.html" class="sc-section-link">View demos <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
         </div>
         <div class="sc-cards" data-reveal>
 
@@ -794,7 +664,7 @@
                 <div class="mock-hero" style="height:55%"></div>
                 <div class="mock-grid mock-grid--3"><span></span><span></span><span></span></div>
               </div>
-              <div class="sc-card-cta">Build this for me →</div>
+              <div class="sc-card-cta">View fine dining demo</div>
             </div>
             <div class="sc-card-meta">
               <span class="sc-card-type">Restaurant Website</span>
@@ -808,18 +678,18 @@
             <div class="sc-card-preview">
               <div class="mock">
                 <div class="mock-nav"><div class="mock-nav-logo"></div><div class="mock-nav-links"><span></span><span></span></div><div class="mock-nav-cta"></div></div>
-                <div style="display:flex;gap:8px;flex:1;margin-top:6px;">
-                  <div style="flex:1.4;border-radius:6px;background:currentColor;opacity:0.15;"></div>
-                  <div style="flex:1;display:flex;flex-direction:column;gap:5px;">
+                <div style="display:flex;gap:7px;flex:1;margin-top:5px;">
+                  <div style="flex:1.4;border-radius:5px;background:currentColor;opacity:0.14;"></div>
+                  <div style="flex:1;display:flex;flex-direction:column;gap:4px;">
                     <div class="mock-bar mock-bar--title"></div>
                     <div class="mock-bar"></div>
                     <div class="mock-bar mock-bar--short"></div>
-                    <div style="margin-top:auto;height:20px;border-radius:4px;background:currentColor;opacity:0.3;width:80px;"></div>
+                    <div style="margin-top:auto;height:18px;border-radius:3px;background:currentColor;opacity:0.28;width:72px;"></div>
                   </div>
                 </div>
-                <div class="mock-grid mock-grid--2" style="margin-top:6px;"><span></span><span></span></div>
+                <div class="mock-grid mock-grid--2" style="margin-top:5px;"><span></span><span></span></div>
               </div>
-              <div class="sc-card-cta">Build this for me →</div>
+              <div class="sc-card-cta">View order platform demo</div>
             </div>
             <div class="sc-card-meta">
               <span class="sc-card-type">Food Delivery</span>
@@ -833,11 +703,11 @@
             <div class="sc-card-preview">
               <div class="mock">
                 <div class="mock-nav"><div class="mock-nav-logo"></div><div class="mock-nav-cta"></div></div>
-                <div class="mock-bar mock-bar--title" style="margin-top:4px;"></div>
+                <div class="mock-bar mock-bar--title" style="margin-top:3px;"></div>
                 <div class="mock-bar mock-bar--med"></div>
-                <div class="mock-grid mock-grid--2" style="flex:1;margin-top:6px;"><span></span><span></span><span></span><span></span></div>
+                <div class="mock-grid mock-grid--2" style="flex:1;margin-top:5px;"><span></span><span></span><span></span><span></span></div>
               </div>
-              <div class="sc-card-cta">Build this for me →</div>
+              <div class="sc-card-cta">View digital menu demo</div>
             </div>
             <div class="sc-card-meta">
               <span class="sc-card-type">QR Menu</span>
@@ -851,14 +721,14 @@
             <div class="sc-card-preview">
               <div class="mock">
                 <div class="mock-nav"><div class="mock-nav-logo"></div><div class="mock-nav-links"><span></span><span></span><span></span></div><div class="mock-nav-cta"></div></div>
-                <div style="flex:1;display:flex;flex-direction:column;gap:5px;margin-top:8px;">
+                <div style="flex:1;display:flex;flex-direction:column;gap:4px;margin-top:7px;">
                   <div class="mock-bar mock-bar--title"></div>
                   <div class="mock-bar mock-bar--wide"></div>
                   <div class="mock-bar mock-bar--med"></div>
-                  <div style="display:flex;gap:6px;margin-top:4px;"><div style="height:24px;width:90px;border-radius:4px;background:currentColor;opacity:0.35;"></div><div style="height:24px;width:72px;border-radius:4px;background:currentColor;opacity:0.15;"></div></div>
+                  <div style="display:flex;gap:5px;margin-top:4px;"><div style="height:22px;width:80px;border-radius:3px;background:currentColor;opacity:0.32;"></div><div style="height:22px;width:64px;border-radius:3px;background:currentColor;opacity:0.12;"></div></div>
                 </div>
               </div>
-              <div class="sc-card-cta">Build this for me →</div>
+              <div class="sc-card-cta">View catering demo</div>
             </div>
             <div class="sc-card-meta">
               <span class="sc-card-type">Catering Business</span>
@@ -874,7 +744,7 @@
                 <div class="mock-nav"><div class="mock-nav-logo"></div><div class="mock-nav-cta"></div></div>
                 <div class="mock-hero"></div>
               </div>
-              <div class="sc-card-cta">Build this for me →</div>
+              <div class="sc-card-cta">View multi-branch demo</div>
             </div>
             <div class="sc-card-meta">
               <span class="sc-card-type">Franchise Chain</span>
@@ -897,122 +767,104 @@
               <div class="sc-section-count">5 examples</div>
             </div>
           </div>
-          <a href="https://wa.me/918134877412?text=I want a SaaS website like the showcase." target="_blank" rel="noopener" class="sc-section-link">Build mine <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+          <a href="https://wa.me/918134877412?text=I want a SaaS website." target="_blank" rel="noopener" class="sc-section-link">Build mine <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
         </div>
         <div class="sc-cards" data-reveal>
 
-          <a class="sc-card sc-card--saas" href="demos/saas/product-landing/index.html">
+          <a class="sc-card sc-card--saas" href="https://wa.me/918134877412" target="_blank" rel="noopener">
             <div class="sc-card-preview">
               <div class="mock">
-                <div class="mock-nav"><div class="mock-nav-logo"></div><div class="mock-nav-links"><span></span><span></span><span></span><span></span></div><div class="mock-nav-cta"></div></div>
-                <div style="text-align:center;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:8px 0;">
-                  <div style="width:60%;height:10px;border-radius:4px;background:currentColor;opacity:0.4;"></div>
-                  <div style="width:40%;height:6px;border-radius:3px;background:currentColor;opacity:0.2;"></div>
-                  <div style="display:flex;gap:6px;margin-top:4px;"><div style="height:20px;width:70px;border-radius:4px;background:currentColor;opacity:0.45;"></div><div style="height:20px;width:56px;border-radius:4px;background:currentColor;opacity:0.15;border:1px solid rgba(14,165,233,0.3);"></div></div>
-                </div>
-                <div class="mock-grid mock-grid--3"><span></span><span></span><span></span></div>
+                <div class="mock-nav"><div class="mock-nav-logo"></div><div class="mock-nav-links"><span></span><span></span><span></span></div><div class="mock-nav-cta"></div></div>
+                <div class="mock-hero"></div>
+                <div class="mock-grid mock-grid--3" style="margin-top:5px;"><span></span><span></span><span></span></div>
               </div>
-              <div class="sc-card-cta">Build this for me →</div>
+              <div class="sc-card-cta">Build this for me</div>
             </div>
             <div class="sc-card-meta">
               <span class="sc-card-type">SaaS Landing</span>
-              <div class="sc-card-name">Product Landing Page</div>
-              <div class="sc-card-desc">Hero with demo CTA, feature grid, pricing table, testimonials</div>
-              <div class="sc-card-tags"><span>Pricing</span><span>Demo</span><span>Testimonials</span></div>
+              <div class="sc-card-name">Product Marketing Site</div>
+              <div class="sc-card-desc">Feature highlights, pricing table, auth flow, dashboard preview</div>
+              <div class="sc-card-tags"><span>Pricing</span><span>Auth</span><span>Waitlist</span></div>
             </div>
           </a>
 
-          <a class="sc-card sc-card--saas" href="demos/saas/app-dashboard/index.html">
-            <div class="sc-card-preview">
-              <div class="mock">
-                <div class="mock-nav"><div class="mock-nav-logo"></div><div class="mock-nav-links"><span></span><span></span></div><div class="mock-nav-cta"></div></div>
-                <div style="display:flex;gap:5px;flex:1;margin-top:6px;">
-                  <div style="width:70px;background:currentColor;opacity:0.06;border-radius:4px;display:flex;flex-direction:column;gap:4px;padding:6px;">
-                    <div style="height:5px;border-radius:2px;background:currentColor;opacity:0.4;width:80%;"></div>
-                    <div style="height:5px;border-radius:2px;background:currentColor;opacity:0.2;"></div>
-                    <div style="height:5px;border-radius:2px;background:currentColor;opacity:0.2;"></div>
-                    <div style="height:5px;border-radius:2px;background:currentColor;opacity:0.2;"></div>
-                  </div>
-                  <div style="flex:1;display:flex;flex-direction:column;gap:4px;">
-                    <div style="height:28px;border-radius:4px;background:currentColor;opacity:0.08;"></div>
-                    <div style="flex:1;border-radius:4px;background:currentColor;opacity:0.05;"></div>
-                  </div>
-                </div>
-              </div>
-              <div class="sc-card-cta">Build this for me →</div>
-            </div>
-            <div class="sc-card-meta">
-              <span class="sc-card-type">Admin Dashboard</span>
-              <div class="sc-card-name">SaaS App Dashboard</div>
-              <div class="sc-card-desc">Analytics overview, user management, settings, sidebar navigation</div>
-              <div class="sc-card-tags"><span>Analytics</span><span>Users</span><span>Admin</span></div>
-            </div>
-          </a>
-
-          <a class="sc-card sc-card--saas" href="demos/saas/api-product/index.html">
+          <a class="sc-card sc-card--saas" href="https://wa.me/918134877412" target="_blank" rel="noopener">
             <div class="sc-card-preview">
               <div class="mock">
                 <div class="mock-nav"><div class="mock-nav-logo"></div><div class="mock-nav-cta"></div></div>
-                <div class="mock-hero"></div>
-                <div class="mock-grid mock-grid--2" style="margin-top:5px;"><span></span><span></span></div>
-              </div>
-              <div class="sc-card-cta">Build this for me →</div>
-            </div>
-            <div class="sc-card-meta">
-              <span class="sc-card-type">B2B Tool</span>
-              <div class="sc-card-name">B2B API Product Site</div>
-              <div class="sc-card-desc">Docs link, use-case sections, integration logos, contact sales</div>
-              <div class="sc-card-tags"><span>B2B</span><span>API</span><span>Enterprise</span></div>
-            </div>
-          </a>
-
-          <a class="sc-card sc-card--saas" href="demos/saas/waitlist-launch/index.html">
-            <div class="sc-card-preview">
-              <div class="mock">
-                <div class="mock-nav"><div class="mock-nav-logo"></div><div class="mock-nav-links"><span></span><span></span><span></span></div><div class="mock-nav-cta"></div></div>
-                <div style="flex:1;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:7px;padding:4px 0;">
-                  <div style="width:70px;height:70px;border-radius:50%;background:currentColor;opacity:0.06;border:2px solid rgba(14,165,233,0.3);"></div>
-                  <div style="width:55%;height:7px;border-radius:3px;background:currentColor;opacity:0.3;"></div>
-                  <div style="width:35%;height:5px;border-radius:3px;background:currentColor;opacity:0.15;"></div>
-                </div>
-              </div>
-              <div class="sc-card-cta">Build this for me →</div>
-            </div>
-            <div class="sc-card-meta">
-              <span class="sc-card-type">Waitlist / Launch</span>
-              <div class="sc-card-name">Coming Soon / Waitlist</div>
-              <div class="sc-card-desc">Email capture, countdown, social links, referral mechanic</div>
-              <div class="sc-card-tags"><span>Waitlist</span><span>Email</span><span>Launch</span></div>
-            </div>
-          </a>
-
-          <a class="sc-card sc-card--saas" href="demos/saas/ai-automation/index.html">
-            <div class="sc-card-preview">
-              <div class="mock">
-                <div class="mock-nav"><div class="mock-nav-logo"></div><div class="mock-nav-links"><span></span><span></span><span></span></div><div class="mock-nav-cta"></div></div>
-                <div style="display:flex;gap:6px;flex:1;margin-top:6px;align-items:stretch;">
-                  <div style="flex:1;border-radius:5px;background:currentColor;opacity:0.06;border:1px solid rgba(14,165,233,0.24);"></div>
-                  <div style="flex:1.2;display:flex;flex-direction:column;gap:5px;">
-                    <div style="height:24px;border-radius:5px;background:currentColor;opacity:0.12;"></div>
-                    <div style="flex:1;border-radius:5px;background:currentColor;opacity:0.05;"></div>
-                    <div style="height:18px;border-radius:5px;background:currentColor;opacity:0.18;width:70%;"></div>
+                <div style="flex:1;display:flex;gap:6px;margin-top:6px;">
+                  <div style="width:56px;background:currentColor;opacity:0.08;border-radius:4px;"></div>
+                  <div style="flex:1;display:flex;flex-direction:column;gap:4px;">
+                    <div class="mock-bar mock-bar--wide"></div>
+                    <div class="mock-bar mock-bar--med"></div>
+                    <div style="flex:1;border-radius:4px;background:currentColor;opacity:0.07;margin-top:4px;"></div>
                   </div>
                 </div>
               </div>
-              <div class="sc-card-cta">Build this for me -></div>
+              <div class="sc-card-cta">Build this for me</div>
             </div>
             <div class="sc-card-meta">
-              <span class="sc-card-type">AI Automation</span>
-              <div class="sc-card-name">Workflow Automation Product</div>
-              <div class="sc-card-desc">Use-case pages, workflow builder, reporting, human review flows</div>
-              <div class="sc-card-tags"><span>AI</span><span>Workflows</span><span>Reports</span></div>
+              <span class="sc-card-type">Admin Dashboard</span>
+              <div class="sc-card-name">SaaS Admin Panel</div>
+              <div class="sc-card-desc">User management, analytics charts, billing, API key management</div>
+              <div class="sc-card-tags"><span>Dashboard</span><span>Analytics</span><span>Billing</span></div>
+            </div>
+          </a>
+
+          <a class="sc-card sc-card--saas" href="https://wa.me/918134877412" target="_blank" rel="noopener">
+            <div class="sc-card-preview">
+              <div class="mock">
+                <div class="mock-nav"><div class="mock-nav-logo"></div><div class="mock-nav-cta"></div></div>
+                <div class="mock-bar mock-bar--title" style="margin-top:4px;"></div>
+                <div class="mock-grid mock-grid--2" style="flex:1;margin-top:6px;"><span></span><span></span><span></span><span></span></div>
+              </div>
+              <div class="sc-card-cta">Build this for me</div>
+            </div>
+            <div class="sc-card-meta">
+              <span class="sc-card-type">Developer Tool</span>
+              <div class="sc-card-name">API Docs &amp; Portal</div>
+              <div class="sc-card-desc">Interactive docs, code playground, API key generation, changelog</div>
+              <div class="sc-card-tags"><span>Docs</span><span>API</span><span>Playground</span></div>
+            </div>
+          </a>
+
+          <a class="sc-card sc-card--saas" href="https://wa.me/918134877412" target="_blank" rel="noopener">
+            <div class="sc-card-preview">
+              <div class="mock">
+                <div class="mock-nav"><div class="mock-nav-logo"></div><div class="mock-nav-cta"></div></div>
+                <div class="mock-hero" style="height:40%;"></div>
+                <div class="mock-grid mock-grid--2" style="margin-top:5px;"><span></span><span></span></div>
+              </div>
+              <div class="sc-card-cta">Build this for me</div>
+            </div>
+            <div class="sc-card-meta">
+              <span class="sc-card-type">B2B Platform</span>
+              <div class="sc-card-name">B2B SaaS Portal</div>
+              <div class="sc-card-desc">Team accounts, role-based access, usage reports, SSO-ready</div>
+              <div class="sc-card-tags"><span>Teams</span><span>RBAC</span><span>Reports</span></div>
+            </div>
+          </a>
+
+          <a class="sc-card sc-card--saas" href="https://wa.me/918134877412" target="_blank" rel="noopener">
+            <div class="sc-card-preview">
+              <div class="mock">
+                <div class="mock-nav"><div class="mock-nav-logo"></div><div class="mock-nav-links"><span></span><span></span></div><div class="mock-nav-cta"></div></div>
+                <div class="mock-hero"></div>
+              </div>
+              <div class="sc-card-cta">Build this for me</div>
+            </div>
+            <div class="sc-card-meta">
+              <span class="sc-card-type">AI Product</span>
+              <div class="sc-card-name">AI Tool Landing Page</div>
+              <div class="sc-card-desc">Live demo section, use-case tabs, enterprise CTA, waitlist form</div>
+              <div class="sc-card-tags"><span>AI</span><span>Demo</span><span>Waitlist</span></div>
             </div>
           </a>
 
         </div>
       </section>
 
-      <!-- ─── ECOMMERCE ─────────────────────────────────────── -->
+      <!-- ─── E-COMMERCE ───────────────────────────────────── -->
       <section class="sc-section" id="ecommerce" data-category="ecommerce">
         <div class="sc-section-header">
           <div class="sc-section-label">
@@ -1022,7 +874,7 @@
               <div class="sc-section-count">4 examples</div>
             </div>
           </div>
-          <a href="https://wa.me/918134877412?text=I want an e-commerce website." target="_blank" rel="noopener" class="sc-section-link">Build mine <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+          <a href="demos/ecommerce/full-store/index.html" class="sc-section-link">View demos <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
         </div>
         <div class="sc-cards" data-reveal>
 
@@ -1030,16 +882,16 @@
             <div class="sc-card-preview">
               <div class="mock">
                 <div class="mock-nav"><div class="mock-nav-logo"></div><div class="mock-nav-links"><span></span><span></span><span></span></div><div class="mock-nav-cta"></div></div>
-                <div class="mock-grid mock-grid--3" style="flex:1;margin-top:6px;"><span></span><span></span><span></span></div>
-                <div style="height:16px;border-radius:4px;background:currentColor;opacity:0.25;width:120px;margin-top:4px;"></div>
+                <div class="mock-hero" style="height:40%;"></div>
+                <div class="mock-grid mock-grid--3" style="margin-top:5px;"><span></span><span></span><span></span></div>
               </div>
-              <div class="sc-card-cta">Build this for me →</div>
+              <div class="sc-card-cta">View store demo</div>
             </div>
             <div class="sc-card-meta">
               <span class="sc-card-type">Online Store</span>
               <div class="sc-card-name">Full E-commerce Store</div>
-              <div class="sc-card-desc">Product catalogue, cart, Razorpay checkout, order tracking</div>
-              <div class="sc-card-tags"><span>Cart</span><span>Checkout</span><span>Inventory</span></div>
+              <div class="sc-card-desc">Product catalog, cart, checkout, order tracking, Razorpay</div>
+              <div class="sc-card-tags"><span>Catalog</span><span>Cart</span><span>Payments</span></div>
             </div>
           </a>
 
@@ -1047,23 +899,16 @@
             <div class="sc-card-preview">
               <div class="mock">
                 <div class="mock-nav"><div class="mock-nav-logo"></div><div class="mock-nav-cta"></div></div>
-                <div style="display:flex;gap:8px;flex:1;margin-top:6px;">
-                  <div style="flex:1;border-radius:6px;background:currentColor;opacity:0.15;"></div>
-                  <div style="flex:1;display:flex;flex-direction:column;gap:5px;padding-top:4px;">
-                    <div style="height:8px;width:80%;border-radius:3px;background:currentColor;opacity:0.35;"></div>
-                    <div style="height:5px;border-radius:2px;background:currentColor;opacity:0.15;"></div>
-                    <div style="height:5px;width:60%;border-radius:2px;background:currentColor;opacity:0.15;"></div>
-                    <div style="height:20px;width:70px;border-radius:4px;background:currentColor;opacity:0.4;margin-top:auto;"></div>
-                  </div>
-                </div>
+                <div class="mock-hero"></div>
+                <div class="mock-grid mock-grid--2" style="margin-top:5px;"><span></span><span></span></div>
               </div>
-              <div class="sc-card-cta">Build this for me →</div>
+              <div class="sc-card-cta">View D2C demo</div>
             </div>
             <div class="sc-card-meta">
               <span class="sc-card-type">D2C Brand</span>
-              <div class="sc-card-name">D2C Product Brand</div>
-              <div class="sc-card-desc">Single product hero, features, UGC gallery, buy now CTA</div>
-              <div class="sc-card-tags"><span>D2C</span><span>Brand</span><span>Conversion</span></div>
+              <div class="sc-card-name">Direct-to-Consumer Brand</div>
+              <div class="sc-card-desc">Brand story, hero product, reviews, loyalty program, social proof</div>
+              <div class="sc-card-tags"><span>Brand</span><span>Reviews</span><span>Loyalty</span></div>
             </div>
           </a>
 
@@ -1071,119 +916,108 @@
             <div class="sc-card-preview">
               <div class="mock">
                 <div class="mock-nav"><div class="mock-nav-logo"></div><div class="mock-nav-links"><span></span><span></span></div><div class="mock-nav-cta"></div></div>
-                <div style="height:6px;border-radius:2px;background:currentColor;opacity:0.15;margin-top:6px;"></div>
-                <div class="mock-grid mock-grid--2" style="flex:1;margin-top:5px;"><span></span><span></span><span></span><span></span></div>
+                <div class="mock-bar mock-bar--title" style="margin-top:4px;"></div>
+                <div class="mock-grid mock-grid--3" style="flex:1;margin-top:6px;"><span></span><span></span><span></span><span></span><span></span><span></span></div>
               </div>
-              <div class="sc-card-cta">Build this for me →</div>
+              <div class="sc-card-cta">View marketplace demo</div>
             </div>
             <div class="sc-card-meta">
               <span class="sc-card-type">Marketplace</span>
-              <div class="sc-card-name">Multi-seller Marketplace</div>
-              <div class="sc-card-desc">Vendor onboarding, product listings, review system, payout dashboard</div>
-              <div class="sc-card-tags"><span>Multi-vendor</span><span>Reviews</span><span>Payouts</span></div>
+              <div class="sc-card-name">Multi-vendor Marketplace</div>
+              <div class="sc-card-desc">Vendor onboarding, product listings, seller dashboard, payouts</div>
+              <div class="sc-card-tags"><span>Vendors</span><span>Payouts</span><span>Reviews</span></div>
             </div>
           </a>
 
-          <a class="sc-card sc-card--ecommerce" href="demos/ecommerce/subscription-commerce/index.html">
-            <div class="sc-card-preview">
-              <div class="mock">
-                <div class="mock-nav"><div class="mock-nav-logo"></div><div class="mock-nav-cta"></div></div>
-                <div class="mock-hero"></div>
-                <div class="mock-grid mock-grid--3" style="margin-top:4px;"><span></span><span></span><span></span></div>
-              </div>
-              <div class="sc-card-cta">Build this for me →</div>
-            </div>
-            <div class="sc-card-meta">
-              <span class="sc-card-type">Subscription Box</span>
-              <div class="sc-card-name">Subscription Commerce</div>
-              <div class="sc-card-desc">Plan selector, recurring billing, customer portal, pause/cancel</div>
-              <div class="sc-card-tags"><span>Subscription</span><span>Billing</span><span>Portal</span></div>
-            </div>
-          </a>
-
-        </div>
-      </section>
-
-      <!-- ─── HEALTH & CLINIC ───────────────────────────────── -->
-      <section class="sc-section" id="health" data-category="health">
-        <div class="sc-section-header">
-          <div class="sc-section-label">
-            <div class="sc-section-icon">🏥</div>
-            <div>
-              <div class="sc-section-title">Health &amp; Clinic</div>
-              <div class="sc-section-count">3 examples</div>
-            </div>
-          </div>
-          <a href="https://wa.me/918134877412?text=I want a clinic website." target="_blank" rel="noopener" class="sc-section-link">Build mine <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-        </div>
-        <div class="sc-cards sc-cards--2col" data-reveal>
-
-          <a class="sc-card sc-card--clinic" href="demos/health/multi-speciality-clinic/index.html">
-            <div class="sc-card-preview">
-              <div class="mock">
-                <div class="mock-nav"><div class="mock-nav-logo"></div><div class="mock-nav-links"><span></span><span></span><span></span></div><div class="mock-nav-cta"></div></div>
-                <div style="display:flex;gap:8px;flex:1;margin-top:6px;">
-                  <div style="flex:1;display:flex;flex-direction:column;gap:5px;padding-top:4px;">
-                    <div class="mock-bar mock-bar--title"></div>
-                    <div class="mock-bar mock-bar--med"></div>
-                    <div class="mock-bar mock-bar--short"></div>
-                    <div style="height:22px;width:80px;border-radius:4px;background:currentColor;opacity:0.35;margin-top:8px;"></div>
-                  </div>
-                  <div style="flex:0.8;border-radius:6px;background:currentColor;opacity:0.1;"></div>
-                </div>
-                <div class="mock-grid mock-grid--3" style="margin-top:6px;"><span></span><span></span><span></span></div>
-              </div>
-              <div class="sc-card-cta">Build this for me →</div>
-            </div>
-            <div class="sc-card-meta">
-              <span class="sc-card-type">Clinic Website</span>
-              <div class="sc-card-name">Multi-speciality Clinic</div>
-              <div class="sc-card-desc">Doctor profiles, appointment booking, specialties, patient testimonials</div>
-              <div class="sc-card-tags"><span>Appointments</span><span>Doctors</span><span>Booking</span></div>
-            </div>
-          </a>
-
-          <a class="sc-card sc-card--clinic" href="demos/health/telehealth-platform/index.html">
+          <a class="sc-card sc-card--ecommerce" href="https://wa.me/918134877412" target="_blank" rel="noopener">
             <div class="sc-card-preview">
               <div class="mock">
                 <div class="mock-nav"><div class="mock-nav-logo"></div><div class="mock-nav-cta"></div></div>
                 <div class="mock-hero"></div>
                 <div class="mock-grid mock-grid--2" style="margin-top:5px;"><span></span><span></span></div>
               </div>
-              <div class="sc-card-cta">Build this for me →</div>
+              <div class="sc-card-cta">Build this for me</div>
             </div>
             <div class="sc-card-meta">
-              <span class="sc-card-type">Health App</span>
-              <div class="sc-card-name">Telehealth Platform</div>
-              <div class="sc-card-desc">Video consult booking, prescription upload, follow-up reminders</div>
-              <div class="sc-card-tags"><span>Telehealth</span><span>Video</span><span>Prescription</span></div>
-            </div>
-          </a>
-
-          <a class="sc-card sc-card--clinic" href="demos/health/online-pharmacy/index.html">
-            <div class="sc-card-preview">
-              <div class="mock">
-                <div class="mock-nav"><div class="mock-nav-logo"></div><div class="mock-nav-links"><span></span><span></span></div><div class="mock-nav-cta"></div></div>
-                <div style="flex:1;display:flex;flex-direction:column;gap:5px;margin-top:8px;">
-                  <div class="mock-bar mock-bar--title"></div>
-                  <div class="mock-bar mock-bar--wide"></div>
-                  <div class="mock-grid mock-grid--2" style="margin-top:5px;"><span></span><span></span></div>
-                </div>
-              </div>
-              <div class="sc-card-cta">Build this for me →</div>
-            </div>
-            <div class="sc-card-meta">
-              <span class="sc-card-type">Pharmacy</span>
-              <div class="sc-card-name">Online Pharmacy</div>
-              <div class="sc-card-desc">Medicine search, upload prescription, home delivery, generic alternatives</div>
-              <div class="sc-card-tags"><span>Pharmacy</span><span>Delivery</span><span>Prescription</span></div>
+              <span class="sc-card-type">Subscription</span>
+              <div class="sc-card-name">Subscription Commerce</div>
+              <div class="sc-card-desc">Plan selection, recurring billing, box customisation, gifting</div>
+              <div class="sc-card-tags"><span>Subscriptions</span><span>Gifting</span><span>Boxes</span></div>
             </div>
           </a>
 
         </div>
       </section>
 
-      <!-- ─── FINTECH ───────────────────────────────────────── -->
+      <!-- ─── HEALTH & CLINIC ──────────────────────────────── -->
+      <section class="sc-section" id="health" data-category="health">
+        <div class="sc-section-header">
+          <div class="sc-section-label">
+            <div class="sc-section-icon">🏥</div>
+            <div>
+              <div class="sc-section-title">Health &amp; Clinics</div>
+              <div class="sc-section-count">3 examples</div>
+            </div>
+          </div>
+          <a href="https://wa.me/918134877412?text=I want a clinic website." target="_blank" rel="noopener" class="sc-section-link">Build mine <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+        <div class="sc-cards sc-cards--2col" data-reveal>
+
+          <a class="sc-card sc-card--clinic" href="https://wa.me/918134877412" target="_blank" rel="noopener">
+            <div class="sc-card-preview">
+              <div class="mock">
+                <div class="mock-nav"><div class="mock-nav-logo"></div><div class="mock-nav-links"><span></span><span></span><span></span></div><div class="mock-nav-cta"></div></div>
+                <div class="mock-hero" style="height:40%;"></div>
+                <div class="mock-grid mock-grid--3" style="margin-top:5px;"><span></span><span></span><span></span></div>
+              </div>
+              <div class="sc-card-cta">Build this for me</div>
+            </div>
+            <div class="sc-card-meta">
+              <span class="sc-card-type">Clinic Website</span>
+              <div class="sc-card-name">Multi-speciality Clinic</div>
+              <div class="sc-card-desc">Doctor profiles, appointment booking, speciality pages, blog</div>
+              <div class="sc-card-tags"><span>Appointments</span><span>Doctors</span><span>Blog</span></div>
+            </div>
+          </a>
+
+          <a class="sc-card sc-card--clinic" href="https://wa.me/918134877412" target="_blank" rel="noopener">
+            <div class="sc-card-preview">
+              <div class="mock">
+                <div class="mock-nav"><div class="mock-nav-logo"></div><div class="mock-nav-cta"></div></div>
+                <div class="mock-bar mock-bar--title" style="margin-top:4px;"></div>
+                <div class="mock-grid mock-grid--2" style="flex:1;margin-top:6px;"><span></span><span></span><span></span><span></span></div>
+              </div>
+              <div class="sc-card-cta">Build this for me</div>
+            </div>
+            <div class="sc-card-meta">
+              <span class="sc-card-type">Health App</span>
+              <div class="sc-card-name">Patient Portal App</div>
+              <div class="sc-card-desc">Health records, test results, prescription refills, teleconsult</div>
+              <div class="sc-card-tags"><span>Records</span><span>Teleconsult</span><span>Prescription</span></div>
+            </div>
+          </a>
+
+          <a class="sc-card sc-card--clinic" href="https://wa.me/918134877412" target="_blank" rel="noopener">
+            <div class="sc-card-preview">
+              <div class="mock">
+                <div class="mock-nav"><div class="mock-nav-logo"></div><div class="mock-nav-cta"></div></div>
+                <div class="mock-hero"></div>
+                <div class="mock-grid mock-grid--2" style="margin-top:5px;"><span></span><span></span></div>
+              </div>
+              <div class="sc-card-cta">Build this for me</div>
+            </div>
+            <div class="sc-card-meta">
+              <span class="sc-card-type">Wellness Brand</span>
+              <div class="sc-card-name">Wellness &amp; Fitness Site</div>
+              <div class="sc-card-desc">Class schedules, memberships, trainer profiles, booking system</div>
+              <div class="sc-card-tags"><span>Classes</span><span>Memberships</span><span>Booking</span></div>
+            </div>
+          </a>
+
+        </div>
+      </section>
+
+      <!-- ─── FINTECH ──────────────────────────────────────── -->
       <section class="sc-section" id="fintech" data-category="fintech">
         <div class="sc-section-header">
           <div class="sc-section-label">
@@ -1193,7 +1027,7 @@
               <div class="sc-section-count">3 examples</div>
             </div>
           </div>
-          <a href="https://wa.me/918134877412?text=I want a fintech platform built." target="_blank" rel="noopener" class="sc-section-link">Build mine <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+          <a href="https://wa.me/918134877412?text=I want a fintech website." target="_blank" rel="noopener" class="sc-section-link">Build mine <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
         </div>
         <div class="sc-cards sc-cards--2col" data-reveal>
 
@@ -1201,21 +1035,39 @@
             <div class="sc-card-preview">
               <div class="mock">
                 <div class="mock-nav"><div class="mock-nav-logo"></div><div class="mock-nav-links"><span></span><span></span><span></span></div><div class="mock-nav-cta"></div></div>
-                <div style="display:flex;gap:5px;flex:1;margin-top:6px;">
-                  <div style="width:80px;background:currentColor;opacity:0.06;border-radius:4px;"></div>
+                <div class="mock-hero" style="height:40%;"></div>
+                <div class="mock-grid mock-grid--3" style="margin-top:5px;"><span></span><span></span><span></span></div>
+              </div>
+              <div class="sc-card-cta">Build this for me</div>
+            </div>
+            <div class="sc-card-meta">
+              <span class="sc-card-type">Lending Platform</span>
+              <div class="sc-card-name">NBFC Loan Platform</div>
+              <div class="sc-card-desc">Loan calculator, KYC flow, credit score check, application tracking</div>
+              <div class="sc-card-tags"><span>Loans</span><span>KYC</span><span>Calculator</span></div>
+            </div>
+          </a>
+
+          <a class="sc-card sc-card--fintech" href="https://wa.me/918134877412" target="_blank" rel="noopener">
+            <div class="sc-card-preview">
+              <div class="mock">
+                <div class="mock-nav"><div class="mock-nav-logo"></div><div class="mock-nav-cta"></div></div>
+                <div style="flex:1;display:flex;gap:6px;margin-top:6px;">
+                  <div style="width:56px;background:currentColor;opacity:0.08;border-radius:4px;"></div>
                   <div style="flex:1;display:flex;flex-direction:column;gap:4px;">
-                    <div style="height:36px;border-radius:5px;background:currentColor;opacity:0.08;"></div>
-                    <div class="mock-grid mock-grid--2"><span></span><span></span><span></span><span></span></div>
+                    <div class="mock-bar mock-bar--wide"></div>
+                    <div class="mock-bar mock-bar--med"></div>
+                    <div style="flex:1;border-radius:4px;background:currentColor;opacity:0.06;margin-top:4px;"></div>
                   </div>
                 </div>
               </div>
-              <div class="sc-card-cta">Build this for me →</div>
+              <div class="sc-card-cta">Build this for me</div>
             </div>
             <div class="sc-card-meta">
-              <span class="sc-card-type">NBFC System</span>
-              <div class="sc-card-name">Loan Management System</div>
-              <div class="sc-card-desc">Borrower onboarding, KYC, EMI schedule, collection dashboard</div>
-              <div class="sc-card-tags"><span>KYC</span><span>EMI</span><span>Collections</span></div>
+              <span class="sc-card-type">Payments Dashboard</span>
+              <div class="sc-card-name">Payment Analytics Portal</div>
+              <div class="sc-card-desc">Transaction history, settlement reports, dispute management, APIs</div>
+              <div class="sc-card-tags"><span>Transactions</span><span>Reports</span><span>Disputes</span></div>
             </div>
           </a>
 
@@ -1224,34 +1076,15 @@
               <div class="mock">
                 <div class="mock-nav"><div class="mock-nav-logo"></div><div class="mock-nav-cta"></div></div>
                 <div class="mock-hero"></div>
-                <div class="mock-grid mock-grid--3" style="margin-top:5px;"><span></span><span></span><span></span></div>
+                <div class="mock-grid mock-grid--2" style="margin-top:5px;"><span></span><span></span></div>
               </div>
-              <div class="sc-card-cta">Build this for me →</div>
-            </div>
-            <div class="sc-card-meta">
-              <span class="sc-card-type">Payment Gateway</span>
-              <div class="sc-card-name">Payment Solutions Site</div>
-              <div class="sc-card-desc">Integration docs, pricing, API playground, merchant signup</div>
-              <div class="sc-card-tags"><span>Payments</span><span>API</span><span>Merchant</span></div>
-            </div>
-          </a>
-
-          <a class="sc-card sc-card--fintech" href="https://wa.me/918134877412" target="_blank" rel="noopener">
-            <div class="sc-card-preview">
-              <div class="mock">
-                <div class="mock-nav"><div class="mock-nav-logo"></div><div class="mock-nav-links"><span></span><span></span></div><div class="mock-nav-cta"></div></div>
-                <div style="flex:1;margin-top:6px;display:flex;flex-direction:column;gap:4px;">
-                  <div style="height:28px;border-radius:4px;background:currentColor;opacity:0.08;"></div>
-                  <div class="mock-grid mock-grid--2" style="flex:1;"><span></span><span></span><span></span><span></span></div>
-                </div>
-              </div>
-              <div class="sc-card-cta">Build this for me →</div>
+              <div class="sc-card-cta">Build this for me</div>
             </div>
             <div class="sc-card-meta">
               <span class="sc-card-type">Investment Platform</span>
               <div class="sc-card-name">Wealth Management App</div>
-              <div class="sc-card-desc">Portfolio tracker, mutual fund integration, SIP calculator, statements</div>
-              <div class="sc-card-tags"><span>Investments</span><span>SIP</span><span>Portfolio</span></div>
+              <div class="sc-card-desc">Portfolio tracker, fund comparison, SIP calculator, advisor chat</div>
+              <div class="sc-card-tags"><span>Portfolio</span><span>SIP</span><span>Advisor</span></div>
             </div>
           </a>
 
@@ -1262,30 +1095,30 @@
       <section class="sc-section" id="education" data-category="education">
         <div class="sc-section-header">
           <div class="sc-section-label">
-            <div class="sc-section-icon">📚</div>
+            <div class="sc-section-icon">🎓</div>
             <div>
               <div class="sc-section-title">Education &amp; EdTech</div>
               <div class="sc-section-count">3 examples</div>
             </div>
           </div>
-          <a href="https://wa.me/918134877412?text=I want an education website." target="_blank" rel="noopener" class="sc-section-link">Build mine <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+          <a href="https://wa.me/918134877412?text=I want an education website." target="_blank" rel="noopener" class="sc-section-link">Build mine <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
         </div>
-        <div class="sc-cards" data-reveal>
+        <div class="sc-cards sc-cards--2col" data-reveal>
 
           <a class="sc-card sc-card--education" href="https://wa.me/918134877412" target="_blank" rel="noopener">
             <div class="sc-card-preview">
               <div class="mock">
-                <div class="mock-nav"><div class="mock-nav-logo"></div><div class="mock-nav-links"><span></span><span></span><span></span></div><div class="mock-nav-cta"></div></div>
+                <div class="mock-nav"><div class="mock-nav-logo"></div><div class="mock-nav-links"><span></span><span></span></div><div class="mock-nav-cta"></div></div>
                 <div class="mock-hero" style="height:40%;"></div>
                 <div class="mock-grid mock-grid--3" style="margin-top:5px;"><span></span><span></span><span></span></div>
               </div>
-              <div class="sc-card-cta">Build this for me →</div>
+              <div class="sc-card-cta">Build this for me</div>
             </div>
             <div class="sc-card-meta">
-              <span class="sc-card-type">EdTech Platform</span>
-              <div class="sc-card-name">Online Learning Platform</div>
-              <div class="sc-card-desc">Course catalogue, video lessons, quizzes, certificates, instructor portal</div>
-              <div class="sc-card-tags"><span>Courses</span><span>Video</span><span>Certificates</span></div>
+              <span class="sc-card-type">Online Courses</span>
+              <div class="sc-card-name">LMS &amp; Course Platform</div>
+              <div class="sc-card-desc">Video lessons, quizzes, progress tracking, certificates, live sessions</div>
+              <div class="sc-card-tags"><span>LMS</span><span>Video</span><span>Certificates</span></div>
             </div>
           </a>
 
@@ -1293,35 +1126,33 @@
             <div class="sc-card-preview">
               <div class="mock">
                 <div class="mock-nav"><div class="mock-nav-logo"></div><div class="mock-nav-cta"></div></div>
-                <div style="flex:1;display:flex;flex-direction:column;gap:5px;margin-top:8px;">
-                  <div class="mock-bar mock-bar--title"></div>
-                  <div class="mock-bar mock-bar--med"></div>
-                  <div class="mock-grid mock-grid--2" style="flex:1;margin-top:4px;"><span></span><span></span></div>
-                </div>
+                <div class="mock-bar mock-bar--title" style="margin-top:4px;"></div>
+                <div class="mock-grid mock-grid--2" style="flex:1;margin-top:6px;"><span></span><span></span><span></span><span></span></div>
               </div>
-              <div class="sc-card-cta">Build this for me →</div>
+              <div class="sc-card-cta">Build this for me</div>
             </div>
             <div class="sc-card-meta">
               <span class="sc-card-type">School / Institute</span>
-              <div class="sc-card-name">School Website</div>
-              <div class="sc-card-desc">Admissions, faculty, events calendar, alumni portal, parent login</div>
-              <div class="sc-card-tags"><span>Admissions</span><span>Portal</span><span>Events</span></div>
+              <div class="sc-card-name">Institute Website</div>
+              <div class="sc-card-desc">Admission enquiry, faculty profiles, results portal, notice board</div>
+              <div class="sc-card-tags"><span>Admissions</span><span>Results</span><span>Faculty</span></div>
             </div>
           </a>
 
           <a class="sc-card sc-card--education" href="https://wa.me/918134877412" target="_blank" rel="noopener">
             <div class="sc-card-preview">
               <div class="mock">
-                <div class="mock-nav"><div class="mock-nav-logo"></div><div class="mock-nav-links"><span></span><span></span></div><div class="mock-nav-cta"></div></div>
+                <div class="mock-nav"><div class="mock-nav-logo"></div><div class="mock-nav-cta"></div></div>
                 <div class="mock-hero"></div>
+                <div class="mock-grid mock-grid--2" style="margin-top:5px;"><span></span><span></span></div>
               </div>
-              <div class="sc-card-cta">Build this for me →</div>
+              <div class="sc-card-cta">Build this for me</div>
             </div>
             <div class="sc-card-meta">
-              <span class="sc-card-type">Test Prep</span>
-              <div class="sc-card-name">Exam Prep App</div>
-              <div class="sc-card-desc">Mock tests, performance analytics, topic-wise flashcards, leaderboard</div>
-              <div class="sc-card-tags"><span>Mock Tests</span><span>Analytics</span><span>Mobile</span></div>
+              <span class="sc-card-type">EdTech Startup</span>
+              <div class="sc-card-name">Tutoring &amp; Test Prep</div>
+              <div class="sc-card-desc">Subject filter, tutor profiles, demo booking, pricing plans</div>
+              <div class="sc-card-tags"><span>Tutors</span><span>Booking</span><span>Plans</span></div>
             </div>
           </a>
 
@@ -1332,30 +1163,30 @@
       <section class="sc-section" id="realestate" data-category="realestate">
         <div class="sc-section-header">
           <div class="sc-section-label">
-            <div class="sc-section-icon">🏢</div>
+            <div class="sc-section-icon">🏠</div>
             <div>
               <div class="sc-section-title">Real Estate</div>
               <div class="sc-section-count">3 examples</div>
             </div>
           </div>
-          <a href="https://wa.me/918134877412?text=I want a real estate website." target="_blank" rel="noopener" class="sc-section-link">Build mine <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+          <a href="https://wa.me/918134877412?text=I want a real estate website." target="_blank" rel="noopener" class="sc-section-link">Build mine <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
         </div>
-        <div class="sc-cards" data-reveal>
+        <div class="sc-cards sc-cards--2col" data-reveal>
 
           <a class="sc-card sc-card--realestate" href="https://wa.me/918134877412" target="_blank" rel="noopener">
             <div class="sc-card-preview">
               <div class="mock">
-                <div class="mock-nav"><div class="mock-nav-logo"></div><div class="mock-nav-links"><span></span><span></span><span></span></div><div class="mock-nav-cta"></div></div>
-                <div class="mock-hero" style="height:40%;"></div>
+                <div class="mock-nav"><div class="mock-nav-logo"></div><div class="mock-nav-links"><span></span><span></span></div><div class="mock-nav-cta"></div></div>
+                <div class="mock-hero"></div>
                 <div class="mock-grid mock-grid--3" style="margin-top:5px;"><span></span><span></span><span></span></div>
               </div>
-              <div class="sc-card-cta">Build this for me →</div>
+              <div class="sc-card-cta">Build this for me</div>
             </div>
             <div class="sc-card-meta">
-              <span class="sc-card-type">Property Listing</span>
+              <span class="sc-card-type">Property Listings</span>
               <div class="sc-card-name">Real Estate Portal</div>
-              <div class="sc-card-desc">Search with filters, map view, virtual tour, EMI calculator, lead form</div>
-              <div class="sc-card-tags"><span>Listings</span><span>Map</span><span>EMI Calc</span></div>
+              <div class="sc-card-desc">Property search, map view, agent profiles, site visit booking</div>
+              <div class="sc-card-tags"><span>Listings</span><span>Map</span><span>Agents</span></div>
             </div>
           </a>
 
@@ -1366,32 +1197,30 @@
                 <div class="mock-hero"></div>
                 <div class="mock-grid mock-grid--2" style="margin-top:5px;"><span></span><span></span></div>
               </div>
-              <div class="sc-card-cta">Build this for me →</div>
+              <div class="sc-card-cta">Build this for me</div>
             </div>
             <div class="sc-card-meta">
-              <span class="sc-card-type">Developer Site</span>
-              <div class="sc-card-name">Builder / Developer Brand</div>
-              <div class="sc-card-desc">Project showcase, floor plans, brochure download, NRI section</div>
-              <div class="sc-card-tags"><span>Projects</span><span>Floor Plans</span><span>NRI</span></div>
+              <span class="sc-card-type">Builder / Developer</span>
+              <div class="sc-card-name">Property Developer Site</div>
+              <div class="sc-card-desc">Project showcase, floor plans, EMI calculator, brochure download</div>
+              <div class="sc-card-tags"><span>Projects</span><span>EMI Calc</span><span>Brochure</span></div>
             </div>
           </a>
 
           <a class="sc-card sc-card--realestate" href="https://wa.me/918134877412" target="_blank" rel="noopener">
             <div class="sc-card-preview">
               <div class="mock">
-                <div class="mock-nav"><div class="mock-nav-logo"></div><div class="mock-nav-links"><span></span><span></span></div><div class="mock-nav-cta"></div></div>
-                <div style="flex:1;margin-top:6px;display:flex;flex-direction:column;gap:5px;">
-                  <div class="mock-bar mock-bar--title"></div>
-                  <div class="mock-grid mock-grid--2" style="flex:1;"><span></span><span></span><span></span><span></span></div>
-                </div>
+                <div class="mock-nav"><div class="mock-nav-logo"></div><div class="mock-nav-cta"></div></div>
+                <div class="mock-bar mock-bar--title" style="margin-top:4px;"></div>
+                <div class="mock-grid mock-grid--2" style="flex:1;margin-top:6px;"><span></span><span></span><span></span><span></span></div>
               </div>
-              <div class="sc-card-cta">Build this for me →</div>
+              <div class="sc-card-cta">Build this for me</div>
             </div>
             <div class="sc-card-meta">
               <span class="sc-card-type">Rental Platform</span>
-              <div class="sc-card-name">PG / Rental Listing App</div>
-              <div class="sc-card-desc">PG search, amenities filter, owner verification, booking &amp; payment</div>
-              <div class="sc-card-tags"><span>PG</span><span>Rental</span><span>Verified</span></div>
+              <div class="sc-card-name">PG &amp; Rental Marketplace</div>
+              <div class="sc-card-desc">Room listings, verified badges, tenant dashboard, rent receipts</div>
+              <div class="sc-card-tags"><span>PG</span><span>Rentals</span><span>Verified</span></div>
             </div>
           </a>
 
@@ -1402,34 +1231,30 @@
       <section class="sc-section" id="portfolio" data-category="portfolio">
         <div class="sc-section-header">
           <div class="sc-section-label">
-            <div class="sc-section-icon">✨</div>
+            <div class="sc-section-icon">✦</div>
             <div>
-              <div class="sc-section-title">Portfolio &amp; Personal Brand</div>
+              <div class="sc-section-title">Portfolio &amp; Personal</div>
               <div class="sc-section-count">3 examples</div>
             </div>
           </div>
-          <a href="https://wa.me/918134877412?text=I want a portfolio website." target="_blank" rel="noopener" class="sc-section-link">Build mine <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+          <a href="https://wa.me/918134877412?text=I want a portfolio website." target="_blank" rel="noopener" class="sc-section-link">Build mine <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
         </div>
-        <div class="sc-cards" data-reveal>
+        <div class="sc-cards sc-cards--2col" data-reveal>
 
           <a class="sc-card sc-card--portfolio" href="https://wa.me/918134877412" target="_blank" rel="noopener">
             <div class="sc-card-preview">
               <div class="mock">
-                <div class="mock-nav"><div class="mock-nav-logo"></div><div class="mock-nav-links"><span></span><span></span><span></span></div><div class="mock-nav-cta"></div></div>
-                <div style="flex:1;display:flex;flex-direction:column;align-items:flex-start;gap:6px;padding-top:10px;">
-                  <div style="width:44px;height:44px;border-radius:50%;background:currentColor;opacity:0.2;"></div>
-                  <div class="mock-bar mock-bar--title"></div>
-                  <div class="mock-bar mock-bar--med"></div>
-                </div>
-                <div class="mock-grid mock-grid--3" style="margin-top:4px;"><span></span><span></span><span></span></div>
+                <div class="mock-nav"><div class="mock-nav-logo"></div><div class="mock-nav-cta"></div></div>
+                <div class="mock-hero" style="height:40%;"></div>
+                <div class="mock-grid mock-grid--3" style="margin-top:5px;"><span></span><span></span><span></span></div>
               </div>
-              <div class="sc-card-cta">Build this for me →</div>
+              <div class="sc-card-cta">Build this for me</div>
             </div>
             <div class="sc-card-meta">
               <span class="sc-card-type">Creative Portfolio</span>
-              <div class="sc-card-name">Designer / Freelancer</div>
-              <div class="sc-card-desc">Work showcase, case studies, contact form, services list</div>
-              <div class="sc-card-tags"><span>Case Studies</span><span>Contact</span><span>Gallery</span></div>
+              <div class="sc-card-name">Designer Portfolio</div>
+              <div class="sc-card-desc">Case study pages, project gallery, testimonials, contact form</div>
+              <div class="sc-card-tags"><span>Case Studies</span><span>Gallery</span><span>Contact</span></div>
             </div>
           </a>
 
@@ -1438,14 +1263,14 @@
               <div class="mock">
                 <div class="mock-nav"><div class="mock-nav-logo"></div><div class="mock-nav-cta"></div></div>
                 <div class="mock-hero"></div>
-                <div class="mock-grid mock-grid--2" style="margin-top:4px;"><span></span><span></span></div>
+                <div class="mock-grid mock-grid--2" style="margin-top:5px;"><span></span><span></span></div>
               </div>
-              <div class="sc-card-cta">Build this for me →</div>
+              <div class="sc-card-cta">Build this for me</div>
             </div>
             <div class="sc-card-meta">
               <span class="sc-card-type">Developer Portfolio</span>
-              <div class="sc-card-name">Software Developer</div>
-              <div class="sc-card-desc">GitHub projects, skills matrix, blog, resume download, contact</div>
+              <div class="sc-card-name">Tech Portfolio &amp; Resume</div>
+              <div class="sc-card-desc">GitHub projects, skills, blog, downloadable resume, dark/light</div>
               <div class="sc-card-tags"><span>GitHub</span><span>Blog</span><span>Resume</span></div>
             </div>
           </a>
@@ -1454,19 +1279,15 @@
             <div class="sc-card-preview">
               <div class="mock">
                 <div class="mock-nav"><div class="mock-nav-logo"></div><div class="mock-nav-links"><span></span><span></span></div><div class="mock-nav-cta"></div></div>
-                <div style="flex:1;display:flex;flex-direction:column;gap:5px;margin-top:6px;">
-                  <div class="mock-bar mock-bar--title"></div>
-                  <div class="mock-bar mock-bar--wide"></div>
-                  <div class="mock-grid mock-grid--2" style="flex:1;margin-top:4px;"><span></span><span></span></div>
-                </div>
+                <div class="mock-hero"></div>
               </div>
-              <div class="sc-card-cta">Build this for me →</div>
+              <div class="sc-card-cta">Build this for me</div>
             </div>
             <div class="sc-card-meta">
               <span class="sc-card-type">Personal Brand</span>
-              <div class="sc-card-name">Consultant / Speaker</div>
-              <div class="sc-card-desc">Speaking topics, past engagements, newsletter, booking page</div>
-              <div class="sc-card-tags"><span>Speaking</span><span>Newsletter</span><span>Booking</span></div>
+              <div class="sc-card-name">Speaker &amp; Consultant Site</div>
+              <div class="sc-card-desc">Bio, media kit, speaking topics, booking form, press mentions</div>
+              <div class="sc-card-tags"><span>Speaking</span><span>Media Kit</span><span>Booking</span></div>
             </div>
           </a>
 
@@ -1483,30 +1304,24 @@
               <div class="sc-section-count">2 examples</div>
             </div>
           </div>
-          <a href="https://wa.me/918134877412?text=I want a logistics platform." target="_blank" rel="noopener" class="sc-section-link">Build mine <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+          <a href="https://wa.me/918134877412?text=I want a logistics website." target="_blank" rel="noopener" class="sc-section-link">Build mine <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
         </div>
         <div class="sc-cards sc-cards--2col" data-reveal>
 
           <a class="sc-card sc-card--logistics" href="https://wa.me/918134877412" target="_blank" rel="noopener">
             <div class="sc-card-preview">
               <div class="mock">
-                <div class="mock-nav"><div class="mock-nav-logo"></div><div class="mock-nav-links"><span></span><span></span></div><div class="mock-nav-cta"></div></div>
-                <div style="flex:1;display:flex;gap:5px;margin-top:6px;">
-                  <div style="width:80px;background:currentColor;opacity:0.06;border-radius:4px;"></div>
-                  <div style="flex:1;display:flex;flex-direction:column;gap:4px;">
-                    <div class="mock-bar mock-bar--title"></div>
-                    <div class="mock-bar mock-bar--med"></div>
-                    <div class="mock-grid mock-grid--2" style="margin-top:4px;"><span></span><span></span><span></span><span></span></div>
-                  </div>
-                </div>
+                <div class="mock-nav"><div class="mock-nav-logo"></div><div class="mock-nav-links"><span></span><span></span><span></span></div><div class="mock-nav-cta"></div></div>
+                <div class="mock-hero" style="height:40%;"></div>
+                <div class="mock-grid mock-grid--3" style="margin-top:5px;"><span></span><span></span><span></span></div>
               </div>
-              <div class="sc-card-cta">Build this for me →</div>
+              <div class="sc-card-cta">Build this for me</div>
             </div>
             <div class="sc-card-meta">
-              <span class="sc-card-type">Fleet Management</span>
-              <div class="sc-card-name">Transport &amp; Fleet System</div>
-              <div class="sc-card-desc">Live tracking, driver management, trip logs, expense reports</div>
-              <div class="sc-card-tags"><span>GPS</span><span>Fleet</span><span>Tracking</span></div>
+              <span class="sc-card-type">Freight Platform</span>
+              <div class="sc-card-name">Freight &amp; Logistics Portal</div>
+              <div class="sc-card-desc">Shipment tracking, rate calculator, fleet management, B2B login</div>
+              <div class="sc-card-tags"><span>Tracking</span><span>Fleet</span><span>B2B</span></div>
             </div>
           </a>
 
@@ -1515,15 +1330,15 @@
               <div class="mock">
                 <div class="mock-nav"><div class="mock-nav-logo"></div><div class="mock-nav-cta"></div></div>
                 <div class="mock-hero"></div>
-                <div class="mock-grid mock-grid--3" style="margin-top:5px;"><span></span><span></span><span></span></div>
+                <div class="mock-grid mock-grid--2" style="margin-top:5px;"><span></span><span></span></div>
               </div>
-              <div class="sc-card-cta">Build this for me →</div>
+              <div class="sc-card-cta">Build this for me</div>
             </div>
             <div class="sc-card-meta">
-              <span class="sc-card-type">Courier Platform</span>
-              <div class="sc-card-name">Last-mile Delivery App</div>
-              <div class="sc-card-desc">Pickup scheduling, real-time tracking, POD, customer notifications</div>
-              <div class="sc-card-tags"><span>Delivery</span><span>POD</span><span>Notifications</span></div>
+              <span class="sc-card-type">Last-mile Delivery</span>
+              <div class="sc-card-name">Delivery Operations App</div>
+              <div class="sc-card-desc">Route optimisation, driver app, live map, proof of delivery</div>
+              <div class="sc-card-tags"><span>Routes</span><span>Live Map</span><span>POD</span></div>
             </div>
           </a>
 
@@ -1537,10 +1352,10 @@
             <div class="sc-section-icon">🏨</div>
             <div>
               <div class="sc-section-title">Hotels &amp; Hospitality</div>
-              <div class="sc-section-count">2 examples</div>
+              <div class="sc-section-count">3 examples</div>
             </div>
           </div>
-          <a href="https://wa.me/918134877412?text=I want a hotel website." target="_blank" rel="noopener" class="sc-section-link">Build mine <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+          <a href="https://wa.me/918134877412?text=I want a hotel website." target="_blank" rel="noopener" class="sc-section-link">Build mine <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
         </div>
         <div class="sc-cards sc-cards--2col" data-reveal>
 
@@ -1548,15 +1363,15 @@
             <div class="sc-card-preview">
               <div class="mock">
                 <div class="mock-nav"><div class="mock-nav-logo"></div><div class="mock-nav-links"><span></span><span></span><span></span></div><div class="mock-nav-cta"></div></div>
-                <div class="mock-hero" style="height:45%;"></div>
+                <div class="mock-hero" style="height:50%;"></div>
                 <div class="mock-grid mock-grid--3" style="margin-top:5px;"><span></span><span></span><span></span></div>
               </div>
-              <div class="sc-card-cta">Build this for me →</div>
+              <div class="sc-card-cta">Build this for me</div>
             </div>
             <div class="sc-card-meta">
               <span class="sc-card-type">Hotel Website</span>
-              <div class="sc-card-name">Boutique Hotel</div>
-              <div class="sc-card-desc">Room listing, photo galleries, direct booking, package offers</div>
+              <div class="sc-card-name">Boutique Hotel Site</div>
+              <div class="sc-card-desc">Room showcase, direct booking, amenities, reviews, photo gallery</div>
               <div class="sc-card-tags"><span>Booking</span><span>Rooms</span><span>Gallery</span></div>
             </div>
           </a>
@@ -1568,20 +1383,37 @@
                 <div class="mock-hero"></div>
                 <div class="mock-grid mock-grid--2" style="margin-top:5px;"><span></span><span></span></div>
               </div>
-              <div class="sc-card-cta">Build this for me →</div>
+              <div class="sc-card-cta">Build this for me</div>
             </div>
             <div class="sc-card-meta">
-              <span class="sc-card-type">Events Venue</span>
-              <div class="sc-card-name">Wedding / Events Venue</div>
-              <div class="sc-card-desc">Venue gallery, capacity details, vendor list, inquiry &amp; quote form</div>
-              <div class="sc-card-tags"><span>Events</span><span>Weddings</span><span>Inquiry</span></div>
+              <span class="sc-card-type">Event Venue</span>
+              <div class="sc-card-name">Event Venue &amp; Banquet</div>
+              <div class="sc-card-desc">Hall packages, event calendar, virtual tour, inquiry form</div>
+              <div class="sc-card-tags"><span>Packages</span><span>Calendar</span><span>Inquiry</span></div>
+            </div>
+          </a>
+
+          <a class="sc-card sc-card--hospitality" href="https://wa.me/918134877412" target="_blank" rel="noopener">
+            <div class="sc-card-preview">
+              <div class="mock">
+                <div class="mock-nav"><div class="mock-nav-logo"></div><div class="mock-nav-cta"></div></div>
+                <div class="mock-bar mock-bar--title" style="margin-top:4px;"></div>
+                <div class="mock-grid mock-grid--2" style="flex:1;margin-top:6px;"><span></span><span></span><span></span><span></span></div>
+              </div>
+              <div class="sc-card-cta">Build this for me</div>
+            </div>
+            <div class="sc-card-meta">
+              <span class="sc-card-type">Resort / Spa</span>
+              <div class="sc-card-name">Resort &amp; Spa Website</div>
+              <div class="sc-card-desc">Experience pages, spa booking, package builder, loyalty program</div>
+              <div class="sc-card-tags"><span>Spa</span><span>Packages</span><span>Loyalty</span></div>
             </div>
           </a>
 
         </div>
       </section>
 
-      <!-- ─── MOBILE APPS ───────────────────────────────────── -->
+      <!-- ─── MOBILE APP ─────────────────────────────────────── -->
       <section class="sc-section" id="app" data-category="app">
         <div class="sc-section-header">
           <div class="sc-section-label">
@@ -1591,55 +1423,38 @@
               <div class="sc-section-count">4 examples</div>
             </div>
           </div>
-          <a href="https://wa.me/918134877412?text=I want a mobile app built." target="_blank" rel="noopener" class="sc-section-link">Build mine <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+          <a href="https://wa.me/918134877412?text=I want a mobile app." target="_blank" rel="noopener" class="sc-section-link">Build mine <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
         </div>
         <div class="sc-cards" data-reveal>
 
           <a class="sc-card sc-card--app" href="https://wa.me/918134877412" target="_blank" rel="noopener">
             <div class="sc-card-preview">
-              <div class="mock" style="align-items:center;">
-                <div style="width:70px;border-radius:14px;background:currentColor;opacity:0.08;border:1.5px solid rgba(139,92,246,0.2);height:100%;position:relative;overflow:hidden;">
-                  <div style="position:absolute;top:8px;left:50%;transform:translateX(-50%);width:20px;height:3px;border-radius:2px;background:currentColor;opacity:0.3;"></div>
-                  <div style="position:absolute;top:16px;inset-inline:5px;display:flex;flex-direction:column;gap:3px;">
-                    <div style="height:4px;border-radius:2px;background:currentColor;opacity:0.35;width:70%;"></div>
-                    <div style="height:3px;border-radius:2px;background:currentColor;opacity:0.15;"></div>
-                    <div style="height:18px;border-radius:3px;background:currentColor;opacity:0.12;margin-top:2px;"></div>
-                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:2px;">
-                      <div style="height:14px;border-radius:2px;background:currentColor;opacity:0.1;"></div>
-                      <div style="height:14px;border-radius:2px;background:currentColor;opacity:0.1;"></div>
-                      <div style="height:14px;border-radius:2px;background:currentColor;opacity:0.1;"></div>
-                      <div style="height:14px;border-radius:2px;background:currentColor;opacity:0.1;"></div>
-                    </div>
-                  </div>
-                </div>
-                <div style="flex:1;display:flex;flex-direction:column;gap:5px;padding-left:12px;">
-                  <div class="mock-bar mock-bar--title"></div>
-                  <div class="mock-bar mock-bar--med"></div>
-                  <div class="mock-bar mock-bar--short"></div>
-                  <div style="margin-top:8px;height:20px;width:80px;border-radius:4px;background:currentColor;opacity:0.35;"></div>
-                </div>
+              <div class="mock">
+                <div class="mock-nav"><div class="mock-nav-logo"></div><div class="mock-nav-cta"></div></div>
+                <div class="mock-hero" style="height:40%;"></div>
+                <div class="mock-grid mock-grid--2" style="margin-top:5px;"><span></span><span></span><span></span><span></span></div>
               </div>
-              <div class="sc-card-cta">Build this for me →</div>
+              <div class="sc-card-cta">Build this for me</div>
             </div>
             <div class="sc-card-meta">
-              <span class="sc-card-type">Productivity App</span>
-              <div class="sc-card-name">Task &amp; Team Manager</div>
-              <div class="sc-card-desc">Kanban boards, team chat, deadline tracking, push notifications</div>
-              <div class="sc-card-tags"><span>Android</span><span>iOS</span><span>Teams</span></div>
+              <span class="sc-card-type">Consumer App</span>
+              <div class="sc-card-name">Mobile Commerce App</div>
+              <div class="sc-card-desc">Product browsing, wishlist, cart, one-tap checkout, notifications</div>
+              <div class="sc-card-tags"><span>Commerce</span><span>Wishlist</span><span>Push</span></div>
             </div>
           </a>
 
           <a class="sc-card sc-card--app" href="https://wa.me/918134877412" target="_blank" rel="noopener">
             <div class="sc-card-preview">
               <div class="mock">
-                <div class="mock-nav"><div class="mock-nav-logo"></div><div class="mock-nav-cta"></div></div>
+                <div class="mock-nav"><div class="mock-nav-logo"></div><div class="mock-nav-links"><span></span><span></span></div><div class="mock-nav-cta"></div></div>
                 <div class="mock-hero"></div>
                 <div class="mock-grid mock-grid--3" style="margin-top:5px;"><span></span><span></span><span></span></div>
               </div>
-              <div class="sc-card-cta">Build this for me →</div>
+              <div class="sc-card-cta">Build this for me</div>
             </div>
             <div class="sc-card-meta">
-              <span class="sc-card-type">Consumer App</span>
+              <span class="sc-card-type">Service App</span>
               <div class="sc-card-name">On-demand Service App</div>
               <div class="sc-card-desc">Provider discovery, booking, in-app chat, ratings, payment</div>
               <div class="sc-card-tags"><span>On-demand</span><span>Booking</span><span>Ratings</span></div>
@@ -1655,7 +1470,7 @@
                   <div class="mock-grid mock-grid--2" style="flex:1;"><span></span><span></span><span></span><span></span></div>
                 </div>
               </div>
-              <div class="sc-card-cta">Build this for me →</div>
+              <div class="sc-card-cta">Build this for me</div>
             </div>
             <div class="sc-card-meta">
               <span class="sc-card-type">Social / Community</span>
@@ -1672,7 +1487,7 @@
                 <div class="mock-hero"></div>
                 <div class="mock-grid mock-grid--2" style="margin-top:5px;"><span></span><span></span></div>
               </div>
-              <div class="sc-card-cta">Build this for me →</div>
+              <div class="sc-card-cta">Build this for me</div>
             </div>
             <div class="sc-card-meta">
               <span class="sc-card-type">Hyperlocal</span>
@@ -1685,7 +1500,7 @@
         </div>
       </section>
 
-      <!-- ─── NGO & SOCIAL ──────────────────────────────────── -->
+      <!-- ─── NGO & SOCIAL ─────────────────────────────────── -->
       <section class="sc-section" id="ngo" data-category="ngo">
         <div class="sc-section-header">
           <div class="sc-section-label">
@@ -1695,7 +1510,7 @@
               <div class="sc-section-count">2 examples</div>
             </div>
           </div>
-          <a href="https://wa.me/918134877412?text=I want an NGO website." target="_blank" rel="noopener" class="sc-section-link">Build mine <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+          <a href="https://wa.me/918134877412?text=I want an NGO website." target="_blank" rel="noopener" class="sc-section-link">Build mine <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
         </div>
         <div class="sc-cards sc-cards--2col" data-reveal>
 
@@ -1706,7 +1521,7 @@
                 <div class="mock-hero" style="height:40%;"></div>
                 <div class="mock-grid mock-grid--3" style="margin-top:5px;"><span></span><span></span><span></span></div>
               </div>
-              <div class="sc-card-cta">Build this for me →</div>
+              <div class="sc-card-cta">Build this for me</div>
             </div>
             <div class="sc-card-meta">
               <span class="sc-card-type">NGO Website</span>
@@ -1723,7 +1538,7 @@
                 <div class="mock-hero"></div>
                 <div class="mock-grid mock-grid--2" style="margin-top:5px;"><span></span><span></span></div>
               </div>
-              <div class="sc-card-cta">Build this for me →</div>
+              <div class="sc-card-cta">Build this for me</div>
             </div>
             <div class="sc-card-meta">
               <span class="sc-card-type">Community Platform</span>
@@ -1744,15 +1559,13 @@
     <div class="sc-bottom-cta-inner" data-reveal>
       <span class="eyebrow">Ready to build?</span>
       <h2>Don't see your niche?<br><em>We'll build it anyway.</em></h2>
-      <p>Every industry has unique needs. Tell us what you're building — we'll create a custom proposal in 48 hours, no matter the niche.</p>
+      <p>Every industry has unique needs. Tell us what you're building — we'll put together a custom proposal in 48 hours, no matter the niche.</p>
       <div class="sc-bottom-cta-actions">
         <a class="btn-primary" href="https://wa.me/918134877412?text=Hi%20Plynto!%20I%20saw%20the%20showcase%20and%20want%20to%20discuss%20my%20project." target="_blank" rel="noopener">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
           Discuss my project
         </a>
-        <a class="btn-outline" href="index.html">
-          Back to home
-        </a>
+        <a class="btn-outline" href="index.html">Back to home</a>
       </div>
     </div>
   </section>
@@ -1763,14 +1576,14 @@
       <div class="footer-top">
         <div class="footer-brand">
           <a class="footer-logo" href="index.html">Plynto<span class="logo-dot">.</span></a>
-          <p>Building digital products across India.</p>
+          <p>Building digital products across India. Remote-first, results-driven.</p>
         </div>
         <div class="footer-nav">
           <div class="footer-col">
             <span class="footer-col-title">Services</span>
             <a href="index.html#services">Mobile Apps</a>
             <a href="index.html#services">Websites</a>
-            <a href="index.html#services">Portals & Dashboards</a>
+            <a href="index.html#services">Portals &amp; Dashboards</a>
             <a href="index.html#services">Fintech Systems</a>
           </div>
           <div class="footer-col">
@@ -1782,8 +1595,8 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <span>&copy; 2026 Plynto Studio - All rights reserved</span>
-        <span>Pan-India - Remote-first</span>
+        <span>© 2026 Plynto Studio · All rights reserved</span>
+        <span>Pan-India · Remote-first</span>
       </div>
     </div>
   </footer>
@@ -1791,31 +1604,28 @@
   <script>
     // Scroll reveal
     const observer = new IntersectionObserver(
-      (entries) => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } }),
-      { threshold: 0.08 }
+      (entries) => entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+      }),
+      { threshold: 0.06 }
     );
     document.querySelectorAll('[data-reveal]').forEach(el => observer.observe(el));
 
-    // Nav
+    // Nav scroll state
     const nav = document.getElementById('nav');
     window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 10);
+      nav.classList.toggle('scrolled', window.scrollY > 8);
     }, { passive: true });
 
     // Mobile menu
     const toggle = document.getElementById('hamburger');
     const menu = document.getElementById('mobileMenu');
-    const closeMobile = () => {
-      toggle.classList.remove('open');
-      menu.classList.remove('open');
-    };
+    const closeMobile = () => { toggle.classList.remove('open'); menu.classList.remove('open'); };
     toggle.addEventListener('click', () => {
       toggle.classList.toggle('open');
       menu.classList.toggle('open');
     });
-    menu.querySelectorAll('a').forEach((link) => {
-      link.addEventListener('click', closeMobile);
-    });
+    menu.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMobile));
 
     // Filter
     const filterBtns = document.querySelectorAll('.sc-filter-btn');
@@ -1826,11 +1636,7 @@
         btn.classList.add('active');
         const f = btn.dataset.filter;
         sections.forEach(sec => {
-          if (f === 'all' || sec.dataset.category === f) {
-            sec.style.display = '';
-          } else {
-            sec.style.display = 'none';
-          }
+          sec.style.display = (f === 'all' || sec.dataset.category === f) ? '' : 'none';
         });
       });
     });
