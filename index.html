@@ -3,19 +3,661 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Plynto Studio - Apps, Websites & Digital Products</title>
-  <meta name="description" content="We build apps, websites, portals, and digital tools from the first idea to a live product. Professional. Reliable. Affordable. Pan-India delivery." />
-  <meta property="og:title" content="Plynto Studio - Apps, Websites & Digital Products" />
-  <meta property="og:description" content="Got an idea? Let's make it real. We build apps, websites, portals and fintech tools across India." />
-  <meta property="og:type" content="website" />
-  <meta name="twitter:card" content="summary_large_image" />
+  <title>Plynto Studio — Apps, Websites &amp; Digital Products</title>
+  <meta name="description" content="Plynto Studio builds digital products with sharp design, clean execution, and real launch discipline. Fixed pricing, 48h proposals, pan-India." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Clash+Display:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,450;9..40,500;9..40,600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+  <style>
+
+    /* ══════════════════════════════════════════
+       HOMEPAGE — HERO
+    ══════════════════════════════════════════ */
+    .hero {
+      min-height: 100svh;
+      padding-top: var(--nav-h);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Subtle grid background */
+    .hero-grid-bg {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--line) 1px, transparent 1px);
+      background-size: 72px 72px;
+      mask-image: radial-gradient(ellipse 70% 60% at 30% 40%, black 0%, transparent 100%);
+      pointer-events: none;
+    }
+    .hero-glow {
+      position: absolute;
+      width: 640px; height: 640px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(74,222,128,0.09) 0%, transparent 65%);
+      top: -100px; left: -180px;
+      pointer-events: none;
+      filter: blur(60px);
+    }
+
+    /* Main hero content row */
+    .hero-body {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      position: relative;
+    }
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 0;
+      width: 100%;
+      padding-top: 56px;
+      padding-bottom: 40px;
+    }
+    @media (max-width: 860px) {
+      .hero-inner { grid-template-columns: 1fr; }
+    }
+
+    /* Left content */
+    .hero-left { display: flex; flex-direction: column; align-items: flex-start; gap: 22px; }
+
+    .hero-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 10.5px;
+      font-weight: 500;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      color: var(--text-4);
+      animation: fadeUp 0.7s var(--ease-out) both 0s;
+    }
+    .hero-label-line {
+      width: 24px; height: 1px;
+      background: var(--green);
+      opacity: 0.6;
+    }
+
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(52px, 7.5vw, 100px);
+      font-weight: 600;
+      line-height: 0.93;
+      letter-spacing: -2.5px;
+      color: var(--text-1);
+      max-width: 680px;
+      animation: fadeUp 0.8s var(--ease-out) both 0.06s;
+    }
+    .hero-title-em {
+      color: var(--green);
+      font-style: italic;
+      font-weight: 500;
+    }
+
+    .hero-desc {
+      font-size: 15px;
+      font-weight: 400;
+      color: var(--text-3);
+      line-height: 1.85;
+      max-width: 400px;
+      animation: fadeUp 0.8s var(--ease-out) both 0.12s;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      animation: fadeUp 0.8s var(--ease-out) both 0.18s;
+    }
+    @media (max-width: 400px) {
+      .hero-actions { flex-direction: column; width: 100%; }
+      .hero-actions > * { width: 100%; justify-content: center; }
+    }
+
+    .btn-wa {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--green);
+      color: #04120a;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 13px 24px;
+      border-radius: 9px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
+      white-space: nowrap;
+      letter-spacing: -0.1px;
+    }
+    .btn-wa:hover {
+      background: #6ee7a0;
+      box-shadow: 0 4px 24px rgba(74,222,128,0.22);
+      transform: translateY(-1px);
+    }
+    .btn-wa svg { flex-shrink: 0; }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: transparent;
+      border: 1px solid var(--line-hi);
+      color: var(--text-2);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 450;
+      padding: 12px 22px;
+      border-radius: 9px;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+      white-space: nowrap;
+    }
+    .btn-ghost:hover { border-color: var(--line-hi); color: var(--text-1); background: var(--surface); }
+
+    /* Commitment pills */
+    .hero-commits {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      animation: fadeUp 0.8s var(--ease-out) both 0.24s;
+    }
+    .commit-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11.5px;
+      font-weight: 450;
+      color: var(--text-3);
+      background: var(--surface);
+      border: 1px solid var(--line);
+      padding: 6px 12px;
+      border-radius: 6px;
+      letter-spacing: 0.1px;
+    }
+    .commit-pill-dot {
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: var(--green);
+      opacity: 0.7;
+      flex-shrink: 0;
+    }
+
+    /* Right — character image */
+    .hero-right {
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding-left: 32px;
+      position: relative;
+      height: 100%;
+      min-height: 520px;
+    }
+    @media (max-width: 860px) { .hero-right { display: none; } }
+
+    .hero-character {
+      width: 340px;
+      max-width: 340px;
+      object-fit: contain;
+      object-position: bottom;
+      filter: drop-shadow(0 32px 64px rgba(0,0,0,0.5));
+      animation: fadeUp 0.9s var(--ease-out) both 0.08s;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Floating info cards around character */
+    .hero-float {
+      position: absolute;
+      background: var(--bg-card);
+      border: 1px solid var(--line-hi);
+      border-radius: 12px;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+      animation: fadeUp 0.9s var(--ease-out) both;
+      z-index: 3;
+    }
+    .hero-float--tl {
+      top: 90px; left: -20px;
+      animation-delay: 0.3s;
+    }
+    .hero-float--br {
+      bottom: 60px; right: -10px;
+      animation-delay: 0.42s;
+    }
+    .hero-float-icon {
+      width: 34px; height: 34px;
+      border-radius: 9px;
+      background: var(--green-dim);
+      border: 1px solid var(--green-brd);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      font-size: 15px;
+    }
+    .hero-float-text { display: flex; flex-direction: column; gap: 1px; }
+    .hero-float-val {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-1);
+      letter-spacing: -0.5px;
+      line-height: 1;
+    }
+    .hero-float-val small { font-size: 12px; color: var(--green); }
+    .hero-float-label { font-size: 11px; color: var(--text-3); }
+
+    /* Glow behind character */
+    .hero-char-glow {
+      position: absolute;
+      bottom: 0;
+      width: 300px; height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(74,222,128,0.10) 0%, transparent 70%);
+      filter: blur(40px);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* ── TICKER ──────────────────────────────────────────── */
+    .ticker-wrap {
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      background: var(--bg-1);
+      overflow: hidden;
+      padding: 14px 0;
+      position: relative;
+    }
+    .ticker-wrap::before, .ticker-wrap::after {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 0;
+      width: 80px;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .ticker-wrap::before { left: 0; background: linear-gradient(to right, var(--bg-1), transparent); }
+    .ticker-wrap::after  { right: 0; background: linear-gradient(to left, var(--bg-1), transparent); }
+    .ticker-track {
+      display: flex;
+      gap: 0;
+      width: max-content;
+      animation: ticker 28s linear infinite;
+    }
+    @keyframes ticker {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    .ticker-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0 28px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-4);
+      letter-spacing: 0.3px;
+      white-space: nowrap;
+    }
+    .ticker-sep {
+      width: 3px; height: 3px;
+      border-radius: 50%;
+      background: var(--green);
+      opacity: 0.5;
+      flex-shrink: 0;
+    }
+
+    /* ══════════════════════════════════════════
+       METRICS BAR
+    ══════════════════════════════════════════ */
+    .metrics {
+      padding: 56px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--line-md);
+      border: 1px solid var(--line-md);
+      border-radius: var(--r-xl);
+      overflow: hidden;
+    }
+    @media (max-width: 640px) { .metrics-grid { grid-template-columns: 1fr 1fr; } }
+    .metric-card {
+      background: var(--bg-card);
+      padding: 28px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      transition: background 0.2s;
+    }
+    .metric-card:hover { background: var(--bg-2); }
+    .metric-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 44px;
+      font-weight: 700;
+      color: var(--text-1);
+      letter-spacing: -1.5px;
+      line-height: 1;
+    }
+    .metric-num span { font-size: 20px; color: var(--green); }
+    .metric-label { font-size: 12.5px; font-weight: 500; color: var(--text-2); }
+    .metric-sub { font-size: 11.5px; color: var(--text-4); line-height: 1.55; }
+
+    /* ══════════════════════════════════════════
+       SERVICES
+    ══════════════════════════════════════════ */
+    .services {
+      padding: 88px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .section-head { margin-bottom: 52px; }
+    .section-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--green);
+      opacity: 0.8;
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(34px, 5vw, 56px);
+      font-weight: 600;
+      line-height: 1.05;
+      letter-spacing: -1px;
+      color: var(--text-1);
+    }
+    .section-title em { font-style: italic; color: var(--text-3); font-weight: 400; }
+    .section-sub {
+      font-size: 14.5px;
+      color: var(--text-3);
+      line-height: 1.8;
+      max-width: 460px;
+      margin-top: 12px;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    @media (max-width: 860px) { .services-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 520px) { .services-grid { grid-template-columns: 1fr; } }
+
+    .svc-card {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
+      padding: 28px 24px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+      transition: border-color 0.22s, background 0.22s, transform 0.2s;
+    }
+    .svc-card:hover {
+      border-color: var(--green-brd);
+      background: var(--bg-2);
+      transform: translateY(-2px);
+    }
+    .svc-icon {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      background: var(--green-dim);
+      border: 1px solid var(--green-brd);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 4px;
+    }
+    .svc-icon svg { width: 20px; height: 20px; color: var(--green); }
+    .svc-card h3 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-1);
+      letter-spacing: -0.2px;
+      line-height: 1.3;
+    }
+    .svc-card p { font-size: 13px; color: var(--text-3); line-height: 1.75; flex: 1; }
+    .svc-tags { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 4px; }
+    .svc-tag {
+      font-size: 9.5px;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 4px;
+      border: 1px solid var(--line);
+      color: var(--text-4);
+    }
+
+    /* ══════════════════════════════════════════
+       HOW WE WORK
+    ══════════════════════════════════════════ */
+    .process {
+      padding: 88px 0;
+      background: var(--bg-1);
+      border-bottom: 1px solid var(--line);
+    }
+    .process-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 72px;
+      align-items: start;
+    }
+    @media (max-width: 780px) { .process-grid { grid-template-columns: 1fr; gap: 48px; } }
+
+    .process-steps { display: flex; flex-direction: column; gap: 0; }
+    .process-step {
+      display: grid;
+      grid-template-columns: 40px 1fr;
+      gap: 16px;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .process-step:first-child { padding-top: 0; }
+    .process-step:last-child { border-bottom: none; padding-bottom: 0; }
+    .step-num-box {
+      width: 32px; height: 32px;
+      border-radius: 8px;
+      border: 1px solid var(--line-hi);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-4);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .process-step.active .step-num-box {
+      background: var(--green-dim);
+      border-color: var(--green-brd);
+      color: var(--green);
+    }
+    .step-content h4 {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-1);
+      margin-bottom: 5px;
+      letter-spacing: -0.1px;
+    }
+    .step-content p { font-size: 13px; color: var(--text-3); line-height: 1.75; }
+
+    /* Right side — commitment cards */
+    .process-right { display: flex; flex-direction: column; gap: 12px; }
+    .commit-card {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
+      padding: 22px 22px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      transition: border-color 0.2s;
+    }
+    .commit-card:hover { border-color: var(--line-hi); }
+    .commit-icon {
+      width: 38px; height: 38px;
+      border-radius: 10px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      font-size: 16px;
+    }
+    .commit-body h5 { font-size: 14px; font-weight: 600; color: var(--text-1); margin-bottom: 4px; }
+    .commit-body p { font-size: 12.5px; color: var(--text-3); line-height: 1.7; }
+
+    /* ══════════════════════════════════════════
+       WHY US
+    ══════════════════════════════════════════ */
+    .why {
+      padding: 88px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .why-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 72px;
+      align-items: center;
+    }
+    @media (max-width: 780px) { .why-inner { grid-template-columns: 1fr; gap: 44px; } }
+    .why-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(38px, 5.5vw, 64px);
+      font-weight: 600;
+      line-height: 1.0;
+      letter-spacing: -2px;
+      color: var(--text-1);
+      margin-bottom: 16px;
+    }
+    .why-body { font-size: 14.5px; color: var(--text-3); line-height: 1.85; margin-bottom: 28px; }
+    .why-list { display: flex; flex-direction: column; gap: 13px; }
+    .why-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 14px;
+      color: var(--text-2);
+    }
+    .why-check {
+      width: 20px; height: 20px;
+      border-radius: 6px;
+      background: var(--green-dim);
+      border: 1px solid var(--green-brd);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .why-check svg { width: 10px; height: 10px; color: var(--green); }
+
+    /* Right side — feature grid */
+    .why-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--line-md);
+      border: 1px solid var(--line-md);
+      border-radius: var(--r-xl);
+      overflow: hidden;
+    }
+    .why-feat {
+      background: var(--bg-2);
+      padding: 26px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      transition: background 0.2s;
+    }
+    .why-feat:hover { background: #14141a; }
+    .why-feat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 40px;
+      font-weight: 700;
+      color: var(--text-1);
+      letter-spacing: -1.5px;
+      line-height: 1;
+    }
+    .why-feat-num span { font-size: 18px; color: var(--green); }
+    .why-feat-label { font-size: 12px; font-weight: 600; color: var(--text-2); }
+    .why-feat-sub { font-size: 11px; color: var(--text-4); line-height: 1.6; }
+
+    /* ══════════════════════════════════════════
+       FINAL CTA
+    ══════════════════════════════════════════ */
+    .cta-section { padding: 88px 0; }
+    .cta-inner {
+      position: relative;
+      background: var(--bg-2);
+      border: 1px solid var(--line-md);
+      border-radius: var(--r-xl);
+      padding: 72px 60px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 28px;
+    }
+    @media (max-width: 640px) { .cta-inner { padding: 48px 28px; } }
+    .cta-inner::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--green-brd) 40%, transparent);
+    }
+    .cta-glow {
+      position: absolute;
+      width: 400px; height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(74,222,128,0.06) 0%, transparent 70%);
+      bottom: -100px; right: -80px;
+      pointer-events: none;
+      filter: blur(40px);
+    }
+    .cta-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(34px, 5vw, 62px);
+      font-weight: 600;
+      line-height: 1.02;
+      letter-spacing: -1.5px;
+      color: var(--text-1);
+      max-width: 560px;
+    }
+    .cta-title em { font-style: italic; color: var(--text-3); }
+    .cta-sub {
+      font-size: 14.5px;
+      color: var(--text-3);
+      line-height: 1.8;
+      max-width: 420px;
+    }
+    .cta-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+    .cta-note { font-size: 11px; color: var(--text-4); }
+
+    /* ══════════════════════════════════════════
+       FOOTER
+    ══════════════════════════════════════════ */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: none; }
+    }
+  </style>
 </head>
 <body>
+
+  <!-- ═══ NAV ═══════════════════════════════════════════════ -->
   <nav class="nav" id="nav">
     <div class="nav-inner">
       <a class="nav-logo" href="index.html">Plynto<span class="logo-dot">.</span></a>
@@ -29,321 +671,400 @@
           <span class="live-dot"></span>
           Available now
         </span>
-        <a class="nav-cta" href="https://wa.me/918134877412?text=Hi%20Plynto%20Studio!%20I%20saw%20your%20website%20and%20I%27m%20interested%20in%20building%20something." target="_blank" rel="noopener">
+        <a class="nav-cta" href="https://wa.me/918134877412?text=Hi%20Plynto!%20I%27d%20like%20to%20start%20a%20project." target="_blank" rel="noopener">
           Start a project
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </a>
       </div>
-      <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+      <button class="nav-hamburger" id="hamburger" aria-label="Open menu">
         <span></span><span></span><span></span>
       </button>
     </div>
     <div class="nav-mobile" id="mobileMenu">
-      <a href="#services" onclick="closeMobile()">Services</a>
-      <a href="#process" onclick="closeMobile()">Process</a>
+      <a href="#services">Services</a>
+      <a href="#process">Process</a>
       <a href="showcase.html">Showcase</a>
-      <a href="https://wa.me/918134877412" target="_blank" rel="noopener" class="mobile-cta">Chat on WhatsApp</a>
+      <a class="mobile-cta" href="https://wa.me/918134877412" target="_blank" rel="noopener">Start a project</a>
     </div>
   </nav>
 
-  <section class="hero">
-    <div class="hero-bg">
-      <div class="hero-glow hero-glow--1"></div>
-      <div class="hero-glow hero-glow--2"></div>
-      <div class="hero-grid"></div>
-    </div>
-    <div class="hero-inner">
-      <div class="hero-badge" data-reveal>
-        <span class="live-dot"></span>
-        Available for new projects - Pan-India
-      </div>
+  <!-- ═══ HERO ═══════════════════════════════════════════════ -->
+  <section class="hero" id="home">
+    <div class="hero-grid-bg" aria-hidden="true"></div>
+    <div class="hero-glow" aria-hidden="true"></div>
 
-      <div class="hero-layout">
-        <div class="hero-copy">
-          <h1 class="hero-title" data-reveal data-delay="1">
-            Digital products with
-            <span class="hero-title-em">sharp design, clean execution,</span>
-            and real launch discipline.
-          </h1>
+    <div class="hero-body">
+      <div class="container">
+        <div class="hero-inner">
 
-          <p class="hero-sub" data-reveal data-delay="2">
-            Apps, websites, portals, and fintech tools designed and engineered from idea to live product. Fixed pricing, fast proposals, and delivery that stays accountable.
-          </p>
-
-          <div class="hero-actions" data-reveal data-delay="3">
-            <a class="btn-primary" href="https://wa.me/918134877412?text=Hi%20Plynto%20Studio!%20I%20saw%20your%20website%20and%20I%27m%20interested%20in%20building%20something." target="_blank" rel="noopener">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-              Chat on WhatsApp
-            </a>
-            <a class="btn-outline" href="showcase.html">
-              View showcase
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-            </a>
-          </div>
-
-          <div class="hero-proof" data-reveal data-delay="4">
-            <div class="proof-item">
-              <span class="proof-num">100%</span>
-              <span class="proof-label">Fixed pricing</span>
+          <!-- Left -->
+          <div class="hero-left">
+            <div class="hero-label">
+              <span class="hero-label-line"></span>
+              We build digital products
             </div>
-            <div class="proof-divider"></div>
-            <div class="proof-item">
-              <span class="proof-num">48h</span>
-              <span class="proof-label">Proposal turnaround</span>
+
+            <h1 class="hero-title">
+              Sharp design,<br>
+              clean execution,<br>
+              <span class="hero-title-em">real results.</span>
+            </h1>
+
+            <p class="hero-desc">
+              Apps, websites, portals, and fintech tools — designed and engineered from idea to live product. Fixed pricing, fast proposals, delivery that stays accountable.
+            </p>
+
+            <div class="hero-actions">
+              <a class="btn-wa" href="https://wa.me/918134877412?text=Hi%20Plynto!%20I%27d%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                Chat on WhatsApp
+              </a>
+              <a class="btn-ghost" href="showcase.html">
+                View showcase
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </a>
             </div>
-            <div class="proof-divider"></div>
-            <div class="proof-item">
-              <span class="proof-num">4 mo</span>
-              <span class="proof-label">Free post-launch support</span>
+
+            <div class="hero-commits">
+              <span class="commit-pill"><span class="commit-pill-dot"></span>100% Fixed pricing</span>
+              <span class="commit-pill"><span class="commit-pill-dot"></span>48h proposal turnaround</span>
+              <span class="commit-pill"><span class="commit-pill-dot"></span>4 mo post-launch support</span>
+              <span class="commit-pill"><span class="commit-pill-dot"></span>Founder-led delivery</span>
             </div>
           </div>
 
-          <div class="hero-trust" data-reveal data-delay="4">
-            <span>Founder-led delivery</span>
-            <span>Weekly check-ins</span>
-            <span>Production-ready handoff</span>
+          <!-- Right — character image (desktop only) -->
+          <div class="hero-right">
+            <div class="hero-char-glow"></div>
+
+            <!-- Floating card — top left -->
+            <div class="hero-float hero-float--tl">
+              <div class="hero-float-icon">⚡</div>
+              <div class="hero-float-text">
+                <div class="hero-float-val">48<small>h</small></div>
+                <div class="hero-float-label">Proposal turnaround</div>
+              </div>
+            </div>
+
+            <img
+              src="character.png"
+              alt="Plynto Studio"
+              class="hero-character"
+              onerror="this.style.display='none'"
+            />
+
+            <!-- Floating card — bottom right -->
+            <div class="hero-float hero-float--br">
+              <div class="hero-float-icon">🚀</div>
+              <div class="hero-float-text">
+                <div class="hero-float-val">12<small>d</small></div>
+                <div class="hero-float-label">To first preview</div>
+              </div>
+            </div>
           </div>
+
         </div>
-
-        <aside class="hero-panel" data-reveal data-delay="3" aria-label="Project snapshot">
-          <div class="hero-panel-card">
-            <div class="hero-panel-top">
-              <span class="panel-kicker">Launch snapshot</span>
-              <span class="panel-badge">This week</span>
-            </div>
-            <div class="hero-panel-screen">
-              <div class="screen-sidebar">
-                <span></span><span></span><span></span>
-              </div>
-              <div class="screen-main">
-                <div class="screen-header">
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                </div>
-                <div class="screen-hero"></div>
-                <div class="screen-stats">
-                  <div></div><div></div><div></div>
-                </div>
-                <div class="screen-table">
-                  <span></span><span></span><span></span><span></span>
-                </div>
-              </div>
-            </div>
-            <div class="hero-panel-metrics">
-              <div>
-                <strong>06</strong>
-                <span>live modules</span>
-              </div>
-              <div>
-                <strong>12d</strong>
-                <span>to first preview</span>
-              </div>
-              <div>
-                <strong>0</strong>
-                <span>handoff confusion</span>
-              </div>
-            </div>
-          </div>
-          <div class="hero-panel-note">
-            <p>"Structured enough for operators. Clean enough for customers."</p>
-            <span>Plynto design principle</span>
-          </div>
-        </aside>
       </div>
     </div>
 
-    <div class="ticker-wrap" aria-hidden="true">
+    <!-- Ticker -->
+    <div class="ticker-wrap">
       <div class="ticker-track">
-        <span>Mobile Apps</span><span class="sep">*</span>
-        <span>Web Platforms</span><span class="sep">*</span>
-        <span>Fintech Tools</span><span class="sep">*</span>
-        <span>Admin Portals</span><span class="sep">*</span>
-        <span>Custom Dashboards</span><span class="sep">*</span>
-        <span>NBFC Systems</span><span class="sep">*</span>
-        <span>AI-Powered Apps</span><span class="sep">*</span>
-        <span>SaaS Platforms</span><span class="sep">*</span>
-        <span>Mobile Apps</span><span class="sep">*</span>
-        <span>Web Platforms</span><span class="sep">*</span>
-        <span>Fintech Tools</span><span class="sep">*</span>
-        <span>Admin Portals</span><span class="sep">*</span>
-        <span>Custom Dashboards</span><span class="sep">*</span>
-        <span>NBFC Systems</span><span class="sep">*</span>
-        <span>AI-Powered Apps</span><span class="sep">*</span>
-        <span>SaaS Platforms</span><span class="sep">*</span>
+        <!-- first set -->
+        <span class="ticker-item">Mobile Apps<span class="ticker-sep"></span></span>
+        <span class="ticker-item">Web Platforms<span class="ticker-sep"></span></span>
+        <span class="ticker-item">Fintech Tools<span class="ticker-sep"></span></span>
+        <span class="ticker-item">Admin Portals<span class="ticker-sep"></span></span>
+        <span class="ticker-item">Custom Dashboards<span class="ticker-sep"></span></span>
+        <span class="ticker-item">NBFC Systems<span class="ticker-sep"></span></span>
+        <span class="ticker-item">SaaS Platforms<span class="ticker-sep"></span></span>
+        <span class="ticker-item">E-commerce Stores<span class="ticker-sep"></span></span>
+        <span class="ticker-item">AI-Powered Apps<span class="ticker-sep"></span></span>
+        <span class="ticker-item">Restaurant Systems<span class="ticker-sep"></span></span>
+        <span class="ticker-item">Real Estate Portals<span class="ticker-sep"></span></span>
+        <span class="ticker-item">EdTech Platforms<span class="ticker-sep"></span></span>
+        <!-- duplicate for seamless loop -->
+        <span class="ticker-item">Mobile Apps<span class="ticker-sep"></span></span>
+        <span class="ticker-item">Web Platforms<span class="ticker-sep"></span></span>
+        <span class="ticker-item">Fintech Tools<span class="ticker-sep"></span></span>
+        <span class="ticker-item">Admin Portals<span class="ticker-sep"></span></span>
+        <span class="ticker-item">Custom Dashboards<span class="ticker-sep"></span></span>
+        <span class="ticker-item">NBFC Systems<span class="ticker-sep"></span></span>
+        <span class="ticker-item">SaaS Platforms<span class="ticker-sep"></span></span>
+        <span class="ticker-item">E-commerce Stores<span class="ticker-sep"></span></span>
+        <span class="ticker-item">AI-Powered Apps<span class="ticker-sep"></span></span>
+        <span class="ticker-item">Restaurant Systems<span class="ticker-sep"></span></span>
+        <span class="ticker-item">Real Estate Portals<span class="ticker-sep"></span></span>
+        <span class="ticker-item">EdTech Platforms<span class="ticker-sep"></span></span>
       </div>
     </div>
   </section>
 
+  <!-- ═══ METRICS ═══════════════════════════════════════════ -->
+  <section class="metrics">
+    <div class="container">
+      <div class="metrics-grid" data-reveal>
+        <div class="metric-card">
+          <div class="metric-num">48<span>h</span></div>
+          <div class="metric-label">Proposal turnaround</div>
+          <div class="metric-sub">Get a scoped proposal in under 2 days, every time.</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-num">12<span>d</span></div>
+          <div class="metric-label">To first preview</div>
+          <div class="metric-sub">See a working preview of your product within 12 days of kick-off.</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-num">4<span>mo</span></div>
+          <div class="metric-label">Free post-launch support</div>
+          <div class="metric-sub">We stay accountable well after go-live.</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-num">0</div>
+          <div class="metric-label">Handoff confusion</div>
+          <div class="metric-sub">Production-ready code, documented and deployable.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ SERVICES ════════════════════════════════════════════ -->
   <section class="services" id="services">
     <div class="container">
-      <div class="section-header" data-reveal>
-        <span class="eyebrow">What we build</span>
+      <div class="section-head" data-reveal>
+        <div class="section-eyebrow">What we build</div>
         <h2 class="section-title">End-to-end digital<br><em>engineering</em></h2>
+        <p class="section-sub">From a single landing page to a full fintech platform — we build it, design it, and hand it off production-ready.</p>
       </div>
 
-      <div class="services-grid">
-        <article class="service-card" data-reveal data-delay="0">
-          <div class="service-icon-wrap">
-            <div class="service-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
-            </div>
+      <div class="services-grid" data-reveal>
+
+        <div class="svc-card">
+          <div class="svc-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
           </div>
           <h3>Mobile Apps</h3>
-          <p>Android and iOS applications built for scale. Native-quality experience, Play Store and App Store ready.</p>
-          <div class="service-tags">
-            <span>Android</span><span>iOS</span><span>React Native</span>
-          </div>
-        </article>
+          <p>iOS and Android apps built with React Native. From consumer apps to internal tools — fast, reliable, app-store ready.</p>
+          <div class="svc-tags"><span class="svc-tag">React Native</span><span class="svc-tag">iOS</span><span class="svc-tag">Android</span></div>
+        </div>
 
-        <article class="service-card" data-reveal data-delay="1">
-          <div class="service-icon-wrap">
-            <div class="service-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="18" x2="12" y2="21"/></svg>
-            </div>
+        <div class="svc-card">
+          <div class="svc-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
           </div>
           <h3>Websites &amp; Landing Pages</h3>
-          <p>Fast, conversion-focused business sites, portfolios, and landing pages with mobile-first foundations.</p>
-          <div class="service-tags">
-            <span>Landing Page</span><span>Portfolio</span><span>Business</span>
-          </div>
-        </article>
+          <p>High-performance websites and landing pages with SEO foundations, fast load times, and conversion-focused design.</p>
+          <div class="svc-tags"><span class="svc-tag">Next.js</span><span class="svc-tag">SEO</span><span class="svc-tag">CMS</span></div>
+        </div>
 
-        <article class="service-card" data-reveal data-delay="2">
-          <div class="service-icon-wrap">
-            <div class="service-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
-            </div>
+        <div class="svc-card">
+          <div class="svc-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
           </div>
           <h3>Portals &amp; Dashboards</h3>
-          <p>Admin panels, agent dashboards, and internal tools engineered around how your team actually works.</p>
-          <div class="service-tags">
-            <span>Admin Panel</span><span>Dashboard</span><span>Agent Portal</span>
-          </div>
-        </article>
+          <p>Admin panels, client portals, and internal dashboards with real-time data, role-based access, and clean UX.</p>
+          <div class="svc-tags"><span class="svc-tag">B2B</span><span class="svc-tag">RBAC</span><span class="svc-tag">Analytics</span></div>
+        </div>
 
-        <article class="service-card service-card--featured" data-reveal data-delay="3">
-          <div class="service-icon-wrap">
-            <div class="service-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-            </div>
+        <div class="svc-card">
+          <div class="svc-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
           </div>
-          <div class="featured-label">Most requested</div>
           <h3>Fintech &amp; NBFC Systems</h3>
-          <p>Loan management, KYC flows, collections dashboards, and payment integrations built to stay audit-ready.</p>
-          <div class="service-tags">
-            <span>LMS</span><span>KYC</span><span>Collections</span><span>Payments</span>
-          </div>
-        </article>
-      </div>
+          <p>Loan platforms, payment dashboards, KYC flows, and wallet integrations — built to compliance-ready standards.</p>
+          <div class="svc-tags"><span class="svc-tag">Razorpay</span><span class="svc-tag">KYC</span><span class="svc-tag">NBFC</span></div>
+        </div>
 
-      <div class="services-cta" data-reveal>
-        <a class="btn-ghost" href="showcase.html">See all examples -></a>
+        <div class="svc-card">
+          <div class="svc-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+          </div>
+          <h3>E-commerce &amp; Marketplaces</h3>
+          <p>Full-stack e-commerce with catalog management, cart, checkout, order tracking, and payment gateway integrations.</p>
+          <div class="svc-tags"><span class="svc-tag">D2C</span><span class="svc-tag">Marketplace</span><span class="svc-tag">Payments</span></div>
+        </div>
+
+        <div class="svc-card">
+          <div class="svc-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+          </div>
+          <h3>SaaS &amp; AI Products</h3>
+          <p>Product landing pages, onboarding flows, subscription billing, API docs portals, and AI-powered feature integrations.</p>
+          <div class="svc-tags"><span class="svc-tag">SaaS</span><span class="svc-tag">AI</span><span class="svc-tag">API</span></div>
+        </div>
+
       </div>
     </div>
   </section>
 
+  <!-- ═══ PROCESS ══════════════════════════════════════════════ -->
   <section class="process" id="process">
     <div class="container">
-      <div class="section-header centered" data-reveal>
-        <span class="eyebrow">How it works</span>
-        <h2 class="section-title">Simple. Transparent.<br><em>No surprises.</em></h2>
-      </div>
-      <div class="process-steps">
-        <div class="process-step" data-reveal data-delay="0">
-          <div class="step-num">01</div>
-          <div class="step-connector" aria-hidden="true"></div>
-          <h4>Tell us your idea</h4>
-          <p>Reach out on WhatsApp. You do not need a full brief. Rough ideas work fine.</p>
+      <div class="process-grid">
+
+        <div>
+          <div class="section-head" data-reveal>
+            <div class="section-eyebrow">How we work</div>
+            <h2 class="section-title">A process built<br><em>for clarity</em></h2>
+            <p class="section-sub">No guesswork, no scope creep. Every project follows a clear structure from first message to final handoff.</p>
+          </div>
+
+          <div class="process-steps" data-reveal>
+            <div class="process-step active">
+              <div class="step-num-box">01</div>
+              <div class="step-content">
+                <h4>Discovery call &amp; scoping</h4>
+                <p>We understand your product, users, and goals in one structured session. We ask the right questions so nothing is assumed.</p>
+              </div>
+            </div>
+            <div class="process-step">
+              <div class="step-num-box">02</div>
+              <div class="step-content">
+                <h4>Fixed-price proposal in 48h</h4>
+                <p>You receive a detailed scope, timeline, and fixed price — no hourly billing, no surprise invoices mid-project.</p>
+              </div>
+            </div>
+            <div class="process-step">
+              <div class="step-num-box">03</div>
+              <div class="step-content">
+                <h4>Design + build in sprints</h4>
+                <p>Weekly check-ins with working previews. You see real progress, not slide decks. Feedback loops are short and structured.</p>
+              </div>
+            </div>
+            <div class="process-step">
+              <div class="step-num-box">04</div>
+              <div class="step-content">
+                <h4>Production-ready handoff</h4>
+                <p>Clean code, deployed to your infra, documented and tested. We stay on for 4 months post-launch — no extra charge.</p>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="process-step" data-reveal data-delay="1">
-          <div class="step-num">02</div>
-          <div class="step-connector" aria-hidden="true"></div>
-          <h4>Get a fixed quote</h4>
-          <p>Within 48 hours, you receive a clear scope and a fixed price with no hourly billing.</p>
+
+        <div class="process-right" data-reveal>
+          <div class="commit-card">
+            <div class="commit-icon">📋</div>
+            <div class="commit-body">
+              <h5>Structured enough for operators</h5>
+              <p>Every deliverable is scoped, versioned, and tracked. You always know what's being built and when.</p>
+            </div>
+          </div>
+          <div class="commit-card">
+            <div class="commit-icon">🎯</div>
+            <div class="commit-body">
+              <h5>Clean enough for customers</h5>
+              <p>We don't just build functional — we build polished. Every screen is reviewed for usability and visual quality.</p>
+            </div>
+          </div>
+          <div class="commit-card">
+            <div class="commit-icon">🔒</div>
+            <div class="commit-body">
+              <h5>Fixed price, no surprises</h5>
+              <p>One quote, agreed upfront. Scope changes are discussed and priced transparently — never added silently.</p>
+            </div>
+          </div>
+          <div class="commit-card">
+            <div class="commit-icon">🇮🇳</div>
+            <div class="commit-body">
+              <h5>Pan-India, remote-first</h5>
+              <p>We work with clients across India. Fully remote, fully async-capable, no timezone friction.</p>
+            </div>
+          </div>
         </div>
-        <div class="process-step" data-reveal data-delay="2">
-          <div class="step-num">03</div>
-          <div class="step-connector" aria-hidden="true"></div>
-          <h4>We build, you watch</h4>
-          <p>Weekly progress updates keep the work visible. No ghosting, no vague handoffs.</p>
-        </div>
-        <div class="process-step" data-reveal data-delay="3">
-          <div class="step-num">04</div>
-          <h4>Launch + 4 months free</h4>
-          <p>We go live, then stay on for four months of free support, fixes, and guidance.</p>
-        </div>
+
       </div>
     </div>
   </section>
 
+  <!-- ═══ WHY US ═══════════════════════════════════════════════ -->
   <section class="why">
     <div class="container">
       <div class="why-inner">
-        <div class="why-left" data-reveal>
-          <span class="eyebrow">Why Plynto</span>
-          <h2 class="why-title">A partner,<br>not just a<br><em>vendor.</em></h2>
-          <p class="why-body">
-            Most dev shops disappear for months, deliver something unrecognisable, then charge extra for everything. We operate differently: fixed fees, weekly check-ins, and four months of support after every launch.
-          </p>
-          <a class="btn-primary" href="https://wa.me/918134877412?text=Hi%20Plynto%20Studio!%20I%20saw%20your%20website%20and%20I%27m%20interested%20in%20building%20something." target="_blank" rel="noopener">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-            Start a conversation
-          </a>
-        </div>
-        <div class="why-right" data-reveal>
-          <div class="stat-grid">
-            <div class="stat-card">
-              <div class="stat-num">100<span>%</span></div>
-              <div class="stat-label">Fixed-fee pricing</div>
-              <div class="stat-desc">What we quote is what you pay. No hourly billing, no scope creep charges.</div>
+
+        <div data-reveal>
+          <div class="section-eyebrow">Why Plynto</div>
+          <h2 class="why-title">Built to ship,<br>not to<br>impress slides.</h2>
+          <p class="why-body">We're a small, focused team that cares about one thing: your product reaching users and working properly. No bloated retainers. No invisible teams. You work directly with the people building it.</p>
+          <div class="why-list">
+            <div class="why-item">
+              <div class="why-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+              Founder-led — you talk to the builder, not a sales rep
             </div>
-            <div class="stat-card">
-              <div class="stat-num">4<span> mo</span></div>
-              <div class="stat-label">Free post-launch support</div>
-              <div class="stat-desc">Bug fixes, tweaks, and guidance included after every delivery.</div>
+            <div class="why-item">
+              <div class="why-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+              Fixed pricing — agreed before work begins, always
             </div>
-            <div class="stat-card">
-              <div class="stat-num">48<span>h</span></div>
-              <div class="stat-label">Proposal turnaround</div>
-              <div class="stat-desc">Send your idea today. Receive a full proposal within two business days.</div>
+            <div class="why-item">
+              <div class="why-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+              Weekly previews — no black-box development
             </div>
-            <div class="stat-card">
-              <div class="stat-num">&#8734;</div>
-              <div class="stat-label">Pan-India delivery</div>
-              <div class="stat-desc">Remote-first. We work with clients across every state in India.</div>
+            <div class="why-item">
+              <div class="why-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+              Production handoff — not a Figma file and good luck
+            </div>
+            <div class="why-item">
+              <div class="why-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+              4 months post-launch support, included
             </div>
           </div>
         </div>
+
+        <div class="why-grid" data-reveal>
+          <div class="why-feat">
+            <div class="why-feat-num">48<span>h</span></div>
+            <div class="why-feat-label">Proposal turnaround</div>
+            <div class="why-feat-sub">Scoped, priced, and ready to review in under 2 days</div>
+          </div>
+          <div class="why-feat">
+            <div class="why-feat-num">12<span>d</span></div>
+            <div class="why-feat-label">To first preview</div>
+            <div class="why-feat-sub">See real work in 12 days from kick-off</div>
+          </div>
+          <div class="why-feat">
+            <div class="why-feat-num">4<span>mo</span></div>
+            <div class="why-feat-label">Free support</div>
+            <div class="why-feat-sub">Post-launch accountability, no extra billing</div>
+          </div>
+          <div class="why-feat">
+            <div class="why-feat-num">∞</div>
+            <div class="why-feat-label">Any niche</div>
+            <div class="why-feat-sub">Food, fintech, health, SaaS, real estate and beyond</div>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
 
+  <!-- ═══ FINAL CTA ════════════════════════════════════════════ -->
   <section class="cta-section">
     <div class="container">
       <div class="cta-inner" data-reveal>
-        <div class="cta-glow"></div>
-        <div class="cta-text">
-          <h2 class="cta-title">Got an idea?<br><em>Let's make it real.</em></h2>
-          <p class="cta-sub">Whether it is a fully-formed product or something you can barely describe yet, reach out. We will shape the scope with you.</p>
-        </div>
-        <div class="cta-action">
-          <a class="btn-green large" href="https://wa.me/918134877412?text=Hi%20Plynto%20Studio!%20I%20saw%20your%20website%20and%20I%27m%20interested%20in%20building%20something." target="_blank" rel="noopener">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-            Message us on WhatsApp
+        <div class="cta-glow" aria-hidden="true"></div>
+        <div class="section-eyebrow">Ready to build?</div>
+        <h2 class="cta-title">Tell us what<br>you're building.<br><em>We'll take it from there.</em></h2>
+        <p class="cta-sub">Send us a message on WhatsApp with a brief description of your project. We'll follow up within 24 hours with questions — and a proposal in 48.</p>
+        <div class="cta-actions">
+          <a class="btn-wa" href="https://wa.me/918134877412?text=Hi%20Plynto!%20I%27d%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Start on WhatsApp
           </a>
-          <p class="cta-note">Response within 24 hours, always.</p>
+          <a class="btn-ghost" href="showcase.html">
+            Browse showcase
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
         </div>
+        <p class="cta-note">No commitment. No sales calls. Just a conversation.</p>
       </div>
     </div>
   </section>
 
+  <!-- ═══ FOOTER ═══════════════════════════════════════════════ -->
   <footer class="footer">
     <div class="container">
       <div class="footer-top">
         <div class="footer-brand">
           <a class="footer-logo" href="index.html">Plynto<span class="logo-dot">.</span></a>
-          <p class="footer-tagline">Building digital products across India.</p>
+          <p>Building digital products across India. Remote-first, results-driven.</p>
         </div>
         <div class="footer-nav">
           <div class="footer-col">
@@ -362,12 +1083,40 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <span>&copy; 2026 Plynto Studio - All rights reserved</span>
-        <span>Pan-India - Remote-first</span>
+        <span>© 2026 Plynto Studio · All rights reserved</span>
+        <span>Pan-India · Remote-first</span>
       </div>
     </div>
   </footer>
 
-  <script src="main.js"></script>
+  <script>
+    // Nav scroll
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 8);
+    }, { passive: true });
+
+    // Mobile menu
+    const toggle = document.getElementById('hamburger');
+    const menu = document.getElementById('mobileMenu');
+    toggle.addEventListener('click', () => {
+      toggle.classList.toggle('open');
+      menu.classList.toggle('open');
+    });
+    menu.querySelectorAll('a').forEach(l => l.addEventListener('click', () => {
+      toggle.classList.remove('open');
+      menu.classList.remove('open');
+    }));
+
+    // Scroll reveal
+    const observer = new IntersectionObserver(
+      entries => entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+      }),
+      { threshold: 0.07 }
+    );
+    document.querySelectorAll('[data-reveal]').forEach(el => observer.observe(el));
+  </script>
+
 </body>
 </html>
