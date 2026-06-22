@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Client Portal — Plynto Studio</title>
+  <meta name="description" content="Plynto Studio client portal — track your project milestones, communicate, and manage deliverables." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,450;9..40,500;9..40,600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .portal-tab{display:none}
+    .portal-tab.active{display:block}
+    .seo-card{padding:14px 16px;border:1px solid var(--line);border-radius:var(--r-lg);margin-bottom:8px}
+    .seo-card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+    .seo-card-title{font-size:13px;font-weight:500;color:var(--text-1)}
+    .seo-card-score{font-size:20px;font-weight:700;letter-spacing:-0.5px}
+    .seo-card-score.good{color:var(--green)}
+    .seo-card-score.fair{color:#fbbf24}
+    .seo-card-score.poor{color:#f87171}
+    .seo-card-bar{height:4px;border-radius:4px;background:var(--line);overflow:hidden;margin-top:6px}
+    .seo-card-bar-fill{height:100%;border-radius:4px;transition:width 0.5s var(--ease)}
+    .seo-keyword{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--line);font-size:13px}
+    .seo-keyword:last-child{border-bottom:none}
+    .seo-keyword-name{color:var(--text-2)}
+    .seo-keyword-rank{font-weight:500}
+    .support-card{padding:16px 18px;border:1px solid var(--line);border-radius:var(--r-lg)}
+    .support-card textarea{width:100%;padding:9px 12px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);color:var(--text-1);font-size:13px;min-height:80px;resize:vertical;margin-top:6px}
+    .support-card textarea:focus{border-color:var(--green-brd);outline:none}
+    .settings-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
+    .settings-row:last-child{border-bottom:none}
+    .settings-row-label{font-size:13px;color:var(--text-2)}
+    .settings-row-value{font-size:13px;color:var(--text-1)}
+    .tab-nav{display:flex;gap:2px;margin-bottom:24px;overflow-x:auto}
+    .tab-item{padding:6px 14px;font-size:12.5px;font-weight:450;color:var(--text-4);border-radius:var(--r);cursor:pointer;white-space:nowrap;transition:all 0.15s;background:none;border:none}
+    .tab-item:hover{color:var(--text-2);background:var(--surface)}
+    .tab-item.active{color:var(--text-1);background:var(--surface)}
+    @media(max-width:700px){.dash-sidebar{display:none}.portal-mobile-bar{display:flex!important}}
+    .portal-mobile-bar{display:none;gap:4px;padding:0 0 16px;overflow-x:auto}
+  </style>
+</head>
+<body>
+
+  <div class="dash-body">
+    <aside class="dash-sidebar">
+      <button class="dash-sidebar-link active" data-portal-tab="overview">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+        Overview
+      </button>
+      <button class="dash-sidebar-link" data-portal-tab="projects">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg>
+        Projects
+      </button>
+      <button class="dash-sidebar-link" data-portal-tab="messages">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+        Messages
+      </button>
+      <button class="dash-sidebar-link" data-portal-tab="documents">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        Documents
+      </button>
+      <button class="dash-sidebar-link" data-portal-tab="invoices">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+        Invoices
+      </button>
+      <div class="dash-sidebar-title">Reports</div>
+      <button class="dash-sidebar-link" data-portal-tab="seo">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        SEO Reports
+      </button>
+      <button class="dash-sidebar-link" data-portal-tab="geo">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        GEO Reports
+      </button>
+      <div class="dash-sidebar-title">Account</div>
+      <button class="dash-sidebar-link" data-portal-tab="settings">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+        Settings
+      </button>
+      <div style="margin-top:auto;padding-top:12px;border-top:1px solid var(--line)">
+        <button class="dash-sidebar-link" data-portal-tab="support" style="color:var(--text-4)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          Support
+        </button>
+        <button class="dash-sidebar-link danger" id="portalLogout" style="color:var(--text-4)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          Logout
+        </button>
+      </div>
+    </aside>
+
+    <main class="dash-content">
+
+      <!-- Mobile tab nav -->
+      <div class="portal-mobile-bar">
+        <button class="tab-item active" data-portal-tab="overview">Overview</button>
+        <button class="tab-item" data-portal-tab="projects">Projects</button>
+        <button class="tab-item" data-portal-tab="messages">Messages</button>
+        <button class="tab-item" data-portal-tab="documents">Documents</button>
+        <button class="tab-item" data-portal-tab="invoices">Invoices</button>
+        <button class="tab-item" data-portal-tab="seo">SEO</button>
+        <button class="tab-item" data-portal-tab="geo">GEO</button>
+        <button class="tab-item" data-portal-tab="settings">Settings</button>
+        <button class="tab-item" data-portal-tab="support">Support</button>
+      </div>
+
+      <!-- ═══ OVERVIEW ════════════════════════════════════ -->
+      <div class="portal-tab active" id="tab-overview">
+        <div class="dash-header">
+          <div>
+            <div class="dash-title">Overview</div>
+            <div class="dash-desc">Acme Store — E-commerce Platform</div>
+          </div>
+          <span class="status status--active"><span class="status-dot"></span>In Progress</span>
+        </div>
+
+        <div class="dash-metrics">
+          <div class="dash-metric">
+            <div class="dash-metric-label">Overall Progress</div>
+            <div class="dash-metric-value">55%</div>
+            <div class="dash-progress"><div class="dash-progress-bar" style="width:55%"></div></div>
+          </div>
+          <div class="dash-metric">
+            <div class="dash-metric-label">Milestones Completed</div>
+            <div class="dash-metric-value">3 <small>/ 8</small></div>
+            <div class="dash-metric-change up">On track</div>
+          </div>
+          <div class="dash-metric">
+            <div class="dash-metric-label">Days Active</div>
+            <div class="dash-metric-value">14</div>
+            <div class="dash-metric-change up">Week 2 of 4</div>
+          </div>
+          <div class="dash-metric">
+            <div class="dash-metric-label">Next Milestone</div>
+            <div class="dash-metric-value" style="font-size:15px">Design Approval</div>
+            <div class="dash-metric-change up">Due in 3 days</div>
+          </div>
+        </div>
+
+        <div class="dash-grid-2">
+          <div class="dash-section">
+            <div class="dash-section-title">Milestones</div>
+            <div class="portal-milestones">
+              <div class="portal-milestone done">
+                <div class="portal-milestone-check"></div>
+                <div>
+                  <div class="portal-milestone-name">Kick-off &amp; Scoping</div>
+                  <div class="portal-milestone-date">Completed Jun 5</div>
+                </div>
+                <span class="tag">Done</span>
+              </div>
+              <div class="portal-milestone done">
+                <div class="portal-milestone-check"></div>
+                <div>
+                  <div class="portal-milestone-name">Architecture &amp; Tech Setup</div>
+                  <div class="portal-milestone-date">Completed Jun 8</div>
+                </div>
+                <span class="tag">Done</span>
+              </div>
+              <div class="portal-milestone done">
+                <div class="portal-milestone-check"></div>
+                <div>
+                  <div class="portal-milestone-name">Wireframes &amp; UX Flow</div>
+                  <div class="portal-milestone-date">Completed Jun 12</div>
+                </div>
+                <span class="tag">Done</span>
+              </div>
+              <div class="portal-milestone active">
+                <div class="portal-milestone-check"></div>
+                <div>
+                  <div class="portal-milestone-name">Design Approval</div>
+                  <div class="portal-milestone-date">Due Jun 22</div>
+                </div>
+                <span class="tag" style="color:var(--green);border-color:var(--green-brd)">In Progress</span>
+              </div>
+              <div class="portal-milestone">
+                <div class="portal-milestone-check"></div>
+                <div>
+                  <div class="portal-milestone-name">Frontend Build</div>
+                  <div class="portal-milestone-date">Due Jul 1</div>
+                </div>
+                <span class="tag">Pending</span>
+              </div>
+              <div class="portal-milestone">
+                <div class="portal-milestone-check"></div>
+                <div>
+                  <div class="portal-milestone-name">Backend &amp; Payments</div>
+                  <div class="portal-milestone-date">Due Jul 8</div>
+                </div>
+                <span class="tag">Pending</span>
+              </div>
+              <div class="portal-milestone">
+                <div class="portal-milestone-check"></div>
+                <div>
+                  <div class="portal-milestone-name">Testing &amp; QA</div>
+                  <div class="portal-milestone-date">Due Jul 15</div>
+                </div>
+                <span class="tag">Pending</span>
+              </div>
+              <div class="portal-milestone">
+                <div class="portal-milestone-check"></div>
+                <div>
+                  <div class="portal-milestone-name">Launch &amp; Handoff</div>
+                  <div class="portal-milestone-date">Due Jul 20</div>
+                </div>
+                <span class="tag">Pending</span>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="dash-section">
+              <div class="dash-section-title">Upcoming Meetings</div>
+              <div class="card" style="margin-bottom:8px">
+                <div class="card-header">
+                  <span class="card-title">Design Review Call</span>
+                  <span class="tag">Jun 20, 11:00 AM</span>
+                </div>
+                <p class="card-sub">Review final wireframes, approve design direction.</p>
+              </div>
+              <div class="card">
+                <div class="card-header">
+                  <span class="card-title">Sprint Demo</span>
+                  <span class="tag">Jun 27, 10:00 AM</span>
+                </div>
+                <p class="card-sub">Live demo of frontend build — product catalog, cart, and checkout.</p>
+              </div>
+            </div>
+            <div class="dash-section">
+              <div class="dash-section-title">Quick Actions</div>
+              <div style="display:flex;gap:6px;flex-wrap:wrap">
+                <button class="btn btn-sm btn-outline" onclick="switchTab('messages')">Send message</button>
+                <button class="btn btn-sm btn-outline" onclick="switchTab('documents')">View files</button>
+                <button class="btn btn-sm btn-outline" onclick="switchTab('support')">Get support</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ PROJECTS ════════════════════════════════════ -->
+      <div class="portal-tab" id="tab-projects">
+        <div class="dash-header">
+          <div>
+            <div class="dash-title">Projects</div>
+            <div class="dash-desc">All your active and completed projects with Plynto</div>
+          </div>
+        </div>
+        <div class="card" style="margin-bottom:8px;border-color:var(--green-brd)">
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
+            <div>
+              <div class="card-title">Acme Store — E-commerce Platform</div>
+              <p class="card-sub">Full-stack e-commerce with catalog, cart, payments</p>
+            </div>
+            <span class="status status--active"><span class="status-dot"></span>In Progress</span>
+          </div>
+          <div class="dash-progress" style="margin-top:10px"><div class="dash-progress-bar" style="width:55%"></div></div>
+          <div style="display:flex;justify-content:space-between;margin-top:4px;font-size:11px;color:var(--text-4)">
+            <span>Started Jun 1</span>
+            <span>Est. completion Jul 20</span>
+          </div>
+        </div>
+        <div class="card">
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
+            <div>
+              <div class="card-title">Brand Identity — Logo &amp; Guidelines</div>
+              <p class="card-sub">Logo design, color palette, typography system</p>
+            </div>
+            <span class="tag" style="color:var(--green);border-color:var(--green-brd)">Completed</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;margin-top:8px;font-size:11px;color:var(--text-4)">
+            <span>Delivered May 15</span>
+            <span style="color:var(--green)">4mo support until Sep 15</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ MESSAGES ════════════════════════════════════ -->
+      <div class="portal-tab" id="tab-messages">
+        <div class="dash-header">
+          <div>
+            <div class="dash-title">Messages</div>
+            <div class="dash-desc">Conversation history with the Plynto team</div>
+          </div>
+          <button class="btn btn-sm btn-primary">New message</button>
+        </div>
+        <div class="card">
+          <div class="portal-message">
+            <div class="portal-message-header">
+              <span class="portal-message-from">Firdaus (Plynto)</span>
+              <span class="portal-message-date">Today, 10:30 AM</span>
+            </div>
+            <div class="portal-message-preview">Hey Sahil! I've uploaded the wireframe mockups to the Files section. Would love your feedback on the product page layout before we start development.</div>
+          </div>
+          <div class="portal-message">
+            <div class="portal-message-header">
+              <span class="portal-message-from">You</span>
+              <span class="portal-message-date">Yesterday, 4:15 PM</span>
+            </div>
+            <div class="portal-message-preview">The wireframes look great overall. A few suggestions on the checkout flow — can we add a wishlist feature?</div>
+          </div>
+          <div class="portal-message">
+            <div class="portal-message-header">
+              <span class="portal-message-from">Firdaus (Plynto)</span>
+              <span class="portal-message-date">Yesterday, 11:00 AM</span>
+            </div>
+            <div class="portal-message-preview">Absolutely! Wishlist is a standard feature in our build system — added at no extra cost.</div>
+          </div>
+          <div class="portal-message">
+            <div class="portal-message-header">
+              <span class="portal-message-from">You</span>
+              <span class="portal-message-date">Jun 14, 2:30 PM</span>
+            </div>
+            <div class="portal-message-preview">Thanks for the quick turnaround on the wireframes. Looking forward to the review call.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ DOCUMENTS ═══════════════════════════════════ -->
+      <div class="portal-tab" id="tab-documents">
+        <div class="dash-header">
+          <div>
+            <div class="dash-title">Documents &amp; Assets</div>
+            <div class="dash-desc">Project files, designs, and deliverables</div>
+          </div>
+        </div>
+        <div class="card">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+            <span class="card-title">Design Files</span>
+          </div>
+          <div class="portal-file">
+            <div class="portal-file-icon">📄</div>
+            <div class="portal-file-name">Wireframe_v2.pdf</div>
+            <div class="portal-file-size">2.4 MB</div>
+            <div class="portal-file-dl">Download</div>
+          </div>
+          <div class="portal-file">
+            <div class="portal-file-icon">🖼️</div>
+            <div class="portal-file-name">Homepage_Mockup.png</div>
+            <div class="portal-file-size">1.8 MB</div>
+            <div class="portal-file-dl">Download</div>
+          </div>
+          <div class="portal-file">
+            <div class="portal-file-icon">🖼️</div>
+            <div class="portal-file-name">Product_Page_Mockup.png</div>
+            <div class="portal-file-size">2.1 MB</div>
+            <div class="portal-file-dl">Download</div>
+          </div>
+          <div class="portal-file">
+            <div class="portal-file-icon">🎨</div>
+            <div class="portal-file-name">Design_System_Styleguide.pdf</div>
+            <div class="portal-file-size">3.2 MB</div>
+            <div class="portal-file-dl">Download</div>
+          </div>
+        </div>
+        <div class="card" style="margin-top:8px">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+            <span class="card-title">Project Documents</span>
+          </div>
+          <div class="portal-file">
+            <div class="portal-file-icon">📊</div>
+            <div class="portal-file-name">Project_Scope_v1.pdf</div>
+            <div class="portal-file-size">890 KB</div>
+            <div class="portal-file-dl">Download</div>
+          </div>
+          <div class="portal-file">
+            <div class="portal-file-icon">📊</div>
+            <div class="portal-file-name">Technical_Specification.pdf</div>
+            <div class="portal-file-size">1.1 MB</div>
+            <div class="portal-file-dl">Download</div>
+          </div>
+          <div class="portal-file">
+            <div class="portal-file-icon">📊</div>
+            <div class="portal-file-name">Timeline_Roadmap.pdf</div>
+            <div class="portal-file-size">640 KB</div>
+            <div class="portal-file-dl">Download</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ INVOICES ════════════════════════════════════ -->
+      <div class="portal-tab" id="tab-invoices">
+        <div class="dash-header">
+          <div>
+            <div class="dash-title">Invoices &amp; Payments</div>
+            <div class="dash-desc">Payment history and outstanding invoices</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="portal-invoice">
+            <div>
+              <div class="portal-invoice-number">INV-2026-001</div>
+              <div style="font-size:12px;color:var(--text-4)">Project deposit — 50%</div>
+            </div>
+            <div class="portal-invoice-amount">₹2,500</div>
+            <span class="portal-invoice-status paid">Paid</span>
+          </div>
+          <div class="portal-invoice">
+            <div>
+              <div class="portal-invoice-number">INV-2026-002</div>
+              <div style="font-size:12px;color:var(--text-4)">Milestone 2 — Design approval</div>
+            </div>
+            <div class="portal-invoice-amount">₹1,250</div>
+            <span class="portal-invoice-status pending">Pending</span>
+          </div>
+          <div class="portal-invoice">
+            <div>
+              <div class="portal-invoice-number">INV-2026-003</div>
+              <div style="font-size:12px;color:var(--text-4)">Final balance</div>
+            </div>
+            <div class="portal-invoice-amount">₹1,250</div>
+            <span class="portal-invoice-status pending">Pending</span>
+          </div>
+        </div>
+        <div class="card" style="margin-top:8px">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <span class="card-title">Payment Method</span>
+            <span style="font-size:12px;color:var(--text-4)">Razorpay</span>
+          </div>
+          <p class="card-sub" style="margin-top:4px">All payments are processed securely through Razorpay. Invoices include GST and are sent to your registered email.</p>
+        </div>
+      </div>
+
+      <!-- ═══ SEO REPORTS ═════════════════════════════════ -->
+      <div class="portal-tab" id="tab-seo">
+        <div class="dash-header">
+          <div>
+            <div class="dash-title">SEO Reports</div>
+            <div class="dash-desc">Search engine performance and recommendations</div>
+          </div>
+          <span class="tag">Updated weekly</span>
+        </div>
+        <div class="dash-metrics">
+          <div class="dash-metric">
+            <div class="dash-metric-label">Overall SEO Score</div>
+            <div class="dash-metric-value" style="color:var(--green)">84</div>
+            <div class="dash-metric-change up">+6 this month</div>
+          </div>
+          <div class="dash-metric">
+            <div class="dash-metric-label">Organic Traffic</div>
+            <div class="dash-metric-value">1,240</div>
+            <div class="dash-metric-change up">+18% vs last month</div>
+          </div>
+          <div class="dash-metric">
+            <div class="dash-metric-label">Indexed Pages</div>
+            <div class="dash-metric-value">47</div>
+            <div class="dash-metric-change up">+3 this week</div>
+          </div>
+          <div class="dash-metric">
+            <div class="dash-metric-label">Avg. Position</div>
+            <div class="dash-metric-value">11.4</div>
+            <div class="dash-metric-change up">+2.1 positions</div>
+          </div>
+        </div>
+        <div class="dash-section">
+          <div class="dash-section-title">Top Keywords</div>
+          <div class="card">
+            <div class="seo-keyword"><span class="seo-keyword-name">online store india</span><span class="seo-keyword-rank" style="color:var(--green)">#4</span></div>
+            <div class="seo-keyword"><span class="seo-keyword-name">buy products online</span><span class="seo-keyword-rank" style="color:var(--green)">#7</span></div>
+            <div class="seo-keyword"><span class="seo-keyword-name">ecommerce website</span><span class="seo-keyword-rank" style="color:#fbbf24">#12</span></div>
+            <div class="seo-keyword"><span class="seo-keyword-name">online shopping india</span><span class="seo-keyword-rank" style="color:#fbbf24">#15</span></div>
+            <div class="seo-keyword"><span class="seo-keyword-name">best online deals</span><span class="seo-keyword-rank" style="color:var(--text-4)">#23</span></div>
+          </div>
+        </div>
+        <div class="dash-section">
+          <div class="dash-section-title">Audit Results</div>
+          <div class="dash-grid-2">
+            <div class="seo-card"><div class="seo-card-header"><span class="seo-card-title">Performance</span><span class="seo-card-score good">92</span></div><div class="seo-card-bar"><div class="seo-card-bar-fill" style="width:92%;background:var(--green)"></div></div></div>
+            <div class="seo-card"><div class="seo-card-header"><span class="seo-card-title">Accessibility</span><span class="seo-card-score good">88</span></div><div class="seo-card-bar"><div class="seo-card-bar-fill" style="width:88%;background:var(--green)"></div></div></div>
+            <div class="seo-card"><div class="seo-card-header"><span class="seo-card-title">Best Practices</span><span class="seo-card-score fair">76</span></div><div class="seo-card-bar"><div class="seo-card-bar-fill" style="width:76%;background:#fbbf24"></div></div></div>
+            <div class="seo-card"><div class="seo-card-header"><span class="seo-card-title">SEO</span><span class="seo-card-score good">81</span></div><div class="seo-card-bar"><div class="seo-card-bar-fill" style="width:81%;background:var(--green)"></div></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ GEO REPORTS ═════════════════════════════════ -->
+      <div class="portal-tab" id="tab-geo">
+        <div class="dash-header">
+          <div>
+            <div class="dash-title">GEO Reports</div>
+            <div class="dash-desc">Generative Engine Optimization — AI search visibility</div>
+          </div>
+          <span class="tag">Updated weekly</span>
+        </div>
+        <div class="dash-metrics">
+          <div class="dash-metric">
+            <div class="dash-metric-label">AI Mentions</div>
+            <div class="dash-metric-value">142</div>
+            <div class="dash-metric-change up">+24 this week</div>
+          </div>
+          <div class="dash-metric">
+            <div class="dash-metric-label">Brand Sentiment</div>
+            <div class="dash-metric-value" style="color:var(--green)">Positive</div>
+            <div class="dash-metric-change up">94% positive rate</div>
+          </div>
+          <div class="dash-metric">
+            <div class="dash-metric-label">AI Source Score</div>
+            <div class="dash-metric-value">78</div>
+            <div class="dash-metric-change up">+12 this month</div>
+          </div>
+          <div class="dash-metric">
+            <div class="dash-metric-label">ChatGPT Citations</div>
+            <div class="dash-metric-value">8</div>
+            <div class="dash-metric-change up">+3 this week</div>
+          </div>
+        </div>
+        <div class="dash-section">
+          <div class="dash-section-title">AI Platform Presence</div>
+          <div class="card">
+            <div class="seo-keyword"><span class="seo-keyword-name">ChatGPT</span><span class="seo-keyword-rank" style="color:var(--green)">Cited in 8 responses</span></div>
+            <div class="seo-keyword"><span class="seo-keyword-name">Perplexity</span><span class="seo-keyword-rank" style="color:var(--green)">Cited in 5 responses</span></div>
+            <div class="seo-keyword"><span class="seo-keyword-name">Gemini</span><span class="seo-keyword-rank" style="color:#fbbf24">Cited in 3 responses</span></div>
+            <div class="seo-keyword"><span class="seo-keyword-name">Claude</span><span class="seo-keyword-rank" style="color:var(--text-4)">Not detected</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ SETTINGS ════════════════════════════════════ -->
+      <div class="portal-tab" id="tab-settings">
+        <div class="dash-header">
+          <div>
+            <div class="dash-title">Account Settings</div>
+            <div class="dash-desc">Manage your profile, notifications, and preferences</div>
+          </div>
+        </div>
+        <div class="card" style="margin-bottom:8px">
+          <div class="card-title" style="margin-bottom:8px">Profile</div>
+          <div class="settings-row"><span class="settings-row-label">Name</span><span class="settings-row-value">Sahil Kumar</span></div>
+          <div class="settings-row"><span class="settings-row-label">Email</span><span class="settings-row-value">sahil@acme.in</span></div>
+          <div class="settings-row"><span class="settings-row-label">Phone</span><span class="settings-row-value">+91 98765 43210</span></div>
+          <div class="settings-row"><span class="settings-row-label">Company</span><span class="settings-row-value">Acme Store</span></div>
+        </div>
+        <div class="card" style="margin-bottom:8px">
+          <div class="card-title" style="margin-bottom:8px">Notifications</div>
+          <div class="settings-row"><span class="settings-row-label">Email notifications</span><span class="settings-row-value">Enabled</span></div>
+          <div class="settings-row"><span class="settings-row-label">Sprint updates</span><span class="settings-row-value">Weekly digest</span></div>
+          <div class="settings-row"><span class="settings-row-label">Invoice reminders</span><span class="settings-row-value">Enabled</span></div>
+        </div>
+        <div class="card">
+          <div class="card-title" style="margin-bottom:8px">Security</div>
+          <div class="settings-row"><span class="settings-row-label">Password</span><span class="settings-row-value">Last changed 30 days ago</span></div>
+          <div class="settings-row"><span class="settings-row-label">Two-factor auth</span><span class="settings-row-value">Not configured</span></div>
+        </div>
+      </div>
+
+      <!-- ═══ SUPPORT ═════════════════════════════════════ -->
+      <div class="portal-tab" id="tab-support">
+        <div class="dash-header">
+          <div>
+            <div class="dash-title">Support</div>
+            <div class="dash-desc">Get help from the Plynto team</div>
+          </div>
+        </div>
+        <div class="dash-grid-2">
+          <div class="support-card">
+            <div class="card-title">Submit a Request</div>
+            <div class="auth-field" style="margin-top:10px"><label>Subject</label><input type="text" placeholder="Brief description of your issue" style="width:100%;padding:9px 12px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);color:var(--text-1);font-size:13px" /></div>
+            <div class="auth-field"><label>Details</label><textarea placeholder="Describe what you need help with..."></textarea></div>
+            <div class="auth-field"><label>Priority</label>
+              <select style="width:100%;padding:9px 12px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);color:var(--text-1);font-size:13px">
+                <option>Low</option><option>Medium</option><option>High</option><option>Urgent</option>
+              </select>
+            </div>
+            <button class="btn btn-primary" style="width:100%;justify-content:center;margin-top:4px">Submit request</button>
+          </div>
+          <div>
+            <div class="dash-section-title">Recent Tickets</div>
+            <div class="card" style="margin-bottom:8px">
+              <div style="display:flex;justify-content:space-between;align-items:center">
+                <span class="card-title">Payment gateway setup</span>
+                <span class="tag" style="color:var(--green);border-color:var(--green-brd)">Resolved</span>
+              </div>
+              <p class="card-sub" style="margin-top:4px">Resolved in 4 hours</p>
+            </div>
+            <div class="card">
+              <div style="display:flex;justify-content:space-between;align-items:center">
+                <span class="card-title">Analytics integration</span>
+                <span class="tag" style="color:#60a5fa;border-color:rgba(96,165,250,0.2)">In Progress</span>
+              </div>
+              <p class="card-sub" style="margin-top:4px">Team is working on it</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="nav.js"></script>
+  <script>
+    // Portal tab switching
+    function switchTab(tabId) {
+      document.querySelectorAll('.portal-tab').forEach(t => t.classList.remove('active'));
+      document.getElementById('tab-' + tabId)?.classList.add('active');
+      document.querySelectorAll('[data-portal-tab]').forEach(b => {
+        b.classList.toggle('active', b.dataset.portalTab === tabId);
+      });
+    }
+
+    document.querySelectorAll('[data-portal-tab]').forEach(btn => {
+      btn.addEventListener('click', () => switchTab(btn.dataset.portalTab));
+    });
+
+    // Check URL for tab param
+    const urlTab = new URLSearchParams(window.location.search).get('tab');
+    if (urlTab && document.getElementById('tab-' + urlTab)) {
+      switchTab(urlTab);
+    }
+
+    // Portal-specific logout
+    document.getElementById('portalLogout')?.addEventListener('click', () => {
+      localStorage.removeItem('plynto_auth');
+      window.location.href = 'index.html';
+    });
+  </script>
+</body>
+</html>
