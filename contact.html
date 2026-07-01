@@ -25,23 +25,23 @@
     <div class="container">
       <div class="contact-grid" data-reveal>
         <div>
-          <div class="contact-form">
+          <form class="contact-form" id="contact-form" action="https://formspree.io/f/xjgqabeb" method="POST">
             <h3 style="font-size:16px;font-weight:600;color:var(--text-1);margin-bottom:20px;letter-spacing:-0.2px">Project brief</h3>
             <div class="form-field">
-              <label>Your name</label>
-              <input type="text" placeholder="Full name" />
+              <label for="cf-name">Your name</label>
+              <input type="text" id="cf-name" name="name" placeholder="Full name" required />
             </div>
             <div class="form-field">
-              <label>Business / company</label>
-              <input type="text" placeholder="Company or project name" />
+              <label for="cf-company">Business / company</label>
+              <input type="text" id="cf-company" name="company" placeholder="Company or project name" />
             </div>
             <div class="form-field">
-              <label>Email</label>
-              <input type="email" placeholder="you@company.com" />
+              <label for="cf-email">Email</label>
+              <input type="email" id="cf-email" name="email" placeholder="you@company.com" required />
             </div>
             <div class="form-field">
-              <label>What are you building?</label>
-              <select>
+              <label for="cf-category">What are you building?</label>
+              <select id="cf-category" name="category" required>
                 <option value="" disabled selected>Select a category</option>
                 <option>Landing Page</option>
                 <option>Business Website</option>
@@ -58,12 +58,12 @@
               </select>
             </div>
             <div class="form-field">
-              <label>Tell us more</label>
-              <textarea placeholder="What does it do? Who uses it? Any specific requirements or constraints?"></textarea>
+              <label for="cf-message">Tell us more</label>
+              <textarea id="cf-message" name="message" placeholder="What does it do? Who uses it? Any specific requirements or constraints?" required></textarea>
             </div>
             <div class="form-field">
-              <label>Approximate budget</label>
-              <select>
+              <label for="cf-budget">Approximate budget</label>
+              <select id="cf-budget" name="budget">
                 <option value="" disabled selected>Select a range</option>
                 <option>Under ₹10,000</option>
                 <option>₹10,000 – ₹25,000</option>
@@ -74,12 +74,12 @@
                 <option>Not sure yet</option>
               </select>
             </div>
-            <button class="btn btn-primary" style="width:100%;justify-content:center;margin-top:4px" onclick="alert('Thanks! We\'ll be in touch within 24 hours.')">
-              Send project brief
+            <button class="btn btn-primary" type="submit" id="cf-submit" style="width:100%;justify-content:center;margin-top:4px">
+              <span id="cf-submit-label">Send project brief</span>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
             </button>
-            <p style="font-size:11px;color:var(--text-4);text-align:center;margin-top:10px">We respond within 24 hours. No commitment required.</p>
-          </div>
+            <p id="cf-status" style="font-size:11px;color:var(--text-4);text-align:center;margin-top:10px">We respond within 24 hours. No commitment required.</p>
+          </form>
         </div>
 
         <div class="contact-meta">
@@ -149,5 +149,61 @@
   </footer>
 
   <script src="nav.js"></script>
+  <script>
+    (function () {
+      const form = document.getElementById('contact-form');
+      const submitBtn = document.getElementById('cf-submit');
+      const submitLabel = document.getElementById('cf-submit-label');
+      const status = document.getElementById('cf-status');
+      const defaultStatusText = status.textContent;
+      const defaultStatusColor = status.style.color;
+
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+
+        submitBtn.disabled = true;
+        submitBtn.style.opacity = '0.6';
+        submitBtn.style.cursor = 'not-allowed';
+        submitLabel.textContent = 'Sending…';
+        status.textContent = 'Sending your project brief…';
+        status.style.color = 'var(--text-4)';
+
+        try {
+          const response = await fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: { 'Accept': 'application/json' }
+          });
+
+          if (response.ok) {
+            form.reset();
+            submitLabel.textContent = 'Sent';
+            status.textContent = "Thanks — your brief is in. We'll be in touch within 24 hours.";
+            status.style.color = 'var(--green)';
+
+            setTimeout(function () {
+              status.textContent = defaultStatusText;
+              status.style.color = defaultStatusColor;
+              submitLabel.textContent = 'Send project brief';
+            }, 6000);
+          } else {
+            const data = await response.json().catch(() => null);
+            const message = (data && data.errors && data.errors.map(err => err.message).join(', ')) || 'Something went wrong. Please try again or email us directly.';
+            submitLabel.textContent = 'Send project brief';
+            status.textContent = message;
+            status.style.color = '#e5484d';
+          }
+        } catch (err) {
+          submitLabel.textContent = 'Send project brief';
+          status.textContent = 'Network error — please try again or reach us on WhatsApp.';
+          status.style.color = '#e5484d';
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.style.opacity = '';
+          submitBtn.style.cursor = '';
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
